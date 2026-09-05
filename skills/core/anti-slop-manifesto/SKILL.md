@@ -27,6 +27,10 @@ This skill enforces strict **taste boundaries** and negative constraints to guar
 5. **NO Unanchored Floating Cards:**
    - Cards must live inside a structured grid or list with predictable spacing.
    - Do not use arbitrary floating cards with massive diffuse shadows (`shadow-2xl`). Use crisp, layered elevations.
+6. **NO Scope Slop / Unsolicited Feature Bloat:**
+   - One thousand no's for every yes. Build strictly what was requested.
+   - Do NOT invent unrequested side-features (e.g. inventing a Profile Page, Avatar Pickers, or Kanban boards when asked for a simple todo list).
+   - Deliver the requested capability with supreme depth, polished micro-interactions, and zero code duplication.
 
 ---
 
