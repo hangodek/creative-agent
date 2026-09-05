@@ -4,27 +4,24 @@ These standing invariants apply across every programming language, framework, an
 
 ---
 
-## 1. Deep Clarification & Alignment Protocol (Co-Founder Dialogue)
-When the user shares a raw business idea, product concept, or broad initiative in natural language (e.g. *"aku ada ide mau buat..."*, *"bikin app untuk..."*):
-1. **Intelligent Business Deconstruction:**
-   - Act as an elite Lead Architect & Technical Co-Founder.
-   - Deconstruct the business bottleneck, user persona, distribution channel, and core value proposition behind the idea.
-2. **Deep Structured Intake (No Artificial Question Limits):**
-   - Do NOT rush to write code based on assumptions.
-   - Ask focused, high-value clarification questions grouped into clear categories:
-     - **Workflow & Core Engine:** What is the step-by-step user journey? What does it automate?
-     - **Format & Deliverables:** Exact formats (e.g. A4 vs Pocket PDF, responsive web app, data export)?
-     - **Aesthetic Direction (Tailored Options):** Offer 2–3 distinct visual options from the 74 design systems tailored to the niche (e.g., *Editorial Broadsheet* like Wired/Substack vs *Clean Minimal* like Apple/Resend vs *Precision Dark* like Linear). Never rigidly force one aesthetic without choice.
-     - **Data & Technical Boundaries:** Local-first storage vs Cloud DB, authentication requirements.
-   - *Ask as many questions as needed (5, 8, 10 questions) to ensure absolute clarity and zero ambiguity before building.*
-3. **Establish `design-system/MASTER.md` Upon Alignment:**
-   - Once the user responds and confirms the direction, ALWAYS write `design-system/MASTER.md` at the project root to lock in the chosen archetype, hex colors, font pairings, and button geometry.
-   - On all subsequent prompts, adhere to `design-system/MASTER.md` to guarantee zero visual drift.
+## 1. The Design System Contract (`design-system/MASTER.md` is MANDATORY)
+- **EVERY project with a user interface MUST have `design-system/MASTER.md` at its root. No exceptions.**
+- **Scenario A — Direct Build Requests** (e.g. *"make me a simple html js + css todolist app"*, *"build a dashboard"*):
+  - Do NOT stall in repetitive generic approval loops.
+  - Automatically pick the best matching design archetype from the 74-brand catalog (e.g. *Linear* for precision dark, *Notion/Substack* for clean docs, *Stripe* for clean light).
+  - **IMMEDIATELY write `design-system/MASTER.md`** at the project root documenting the archetype, color hexes, typography, and button geometries BEFORE writing component code.
+  - Build the application cleanly adhering to `design-system/MASTER.md`.
+- **Scenario B — Raw Business Ideas & Conceptual Brainstorming** (e.g. *"aku ada ide mau buat..."*, *"bikin bisnis X"*):
+  - Act as an elite Lead Architect & Technical Co-Founder.
+  - Deconstruct the business bottleneck, audience, and distribution channel.
+  - Ask focused, high-value clarification questions without artificial limits (Workflow, Deliverable format, Data storage).
+  - Present 2–3 tailored visual choices from the 74 design systems (e.g. *Wired Broadsheet* vs *Apple Minimal* vs *Linear Dark*).
+  - Once the user selects a direction, write `design-system/MASTER.md` and proceed with implementation.
 
 ---
 
 ## 2. Strict Scope Restraint (One Thousand No's for Every Yes)
-- **Build ONLY what was agreed upon.** If building a focused MVP or tool, DO NOT invent unrequested Profile pages, Avatar pickers, Cover gradient galleries, or speculative Kanban boards.
+- **Build ONLY what was requested.** If asked for a "simple todo list", DO NOT invent Profile pages, Avatar pickers, Cover gradient galleries, or speculative Kanban boards.
 - Focus 100% of your tokens and creativity on making the agreed core workflow robust, accessible, and visually stunning.
 - Never add unrequested speculative features or bloated settings tabs.
 
