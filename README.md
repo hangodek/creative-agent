@@ -5,7 +5,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![CI](https://github.com/hangodek/creative-agent/actions/workflows/ci.yml/badge.svg)](https://github.com/hangodek/creative-agent/actions/workflows/ci.yml)
-[![Skills Count](https://img.shields.io/badge/Total%20Skills-125%2B-emerald.svg)](#skills-catalog)
+[![Skills Count](https://img.shields.io/badge/Total%20Skills-133%2B-emerald.svg)](#skills-catalog)
 [![Design Systems](https://img.shields.io/badge/Design%20Systems-74%20Brands-purple.svg)](skills/design-systems/INDEX.md)
 [![Multi-Agent Ready](https://img.shields.io/badge/Multi--Agent-OpenCode%20%7C%20Claude%20Code%20%7C%20Cursor%20%7C%20Antigravity-orange.svg)](#installation)
 
@@ -15,14 +15,14 @@
 
 ### The Problems with Existing Tools
 1. **Context Bloat & Latency:** Tools like OpenDesign or monolithic design systems dump 50,000–100,000+ tokens of raw HTML, previews, and component catalogs into every single prompt. Inference slows to a crawl, local models choke, and API costs skyrocket.
-2. **Framework Mismatch:** Existing visual design generators spit out raw, static HTML/CSS. If you're building in **React / Next.js**, **Ruby on Rails (Hotwire/ERB)**, **Vue**, or **Svelte**, you're forced to painfully copy-paste thousands of lines of code and run back-and-forth prompt loops to convert it.
+2. **Framework Mismatch:** Existing visual design generators spit out raw, static HTML/CSS. If you're building in **React / Next.js**, **Ruby on Rails (Hotwire/ERB)**, **Laravel (Blade/Livewire)**, **Django**, **Vue**, or **Svelte**, you're forced to painfully copy-paste thousands of lines of code and run back-and-forth prompt loops to convert it.
 3. **The "AI Slop" Trap:** Without strict aesthetic guardrails, coding agents gravitate towards the mathematical average of their training data: dark purple-cyan gradient cards, washed-out low-contrast text, excessive glassmorphism blur, and cliché marketing copy (*"Empower your seamless workflow"*).
 
 ### The Creative Agent Solution
 * **⚡ Just-in-Time (JIT) Modular Loading:** Each skill and design system is an isolated `SKILL.md`. When you ask for a Spotify-style dashboard in Rails, only ~1,200 tokens of relevant tokens and adapter rules are loaded. Instant TTFT, ultra-lightweight, zero lag.
-* **🛠 Native Framework Adapters:** Automatically introspects your workspace (`package.json`, `Gemfile`, Tailwind setup, component libraries) and outputs idiomatic, production-ready code directly into your project files (`.tsx`, `.html.erb`, `.vue`, `.svelte`).
-* **🛡 Anti-Slop Manifesto:** Strict negative constraints that ban AI slop and enforce mathematical typography, verified WCAG/APCA contrast ratios, and tactile micro-interactions.
-* **🌐 115+ Production-Grade Skills:** Combines Matt Pocock's complete engineering and productivity suite (TDD, Code Review, Architecture Deepening, Grilling), OpenDesign workflows, and 74 measured real-world brand design systems.
+* **🛠 12 Polyglot Framework Adapters:** Automatically introspects your workspace (`package.json`, `Gemfile`, `composer.json`, `pyproject.toml`, `go.mod`, `pubspec.yaml`, Tailwind v3/v4 setup) and outputs idiomatic, production-ready code directly into your project files.
+* **🛡 Universal Polyglot Guardian (`rules/AGENTS.md`):** High-level architectural invariants (Strict Scope Restraint, Single Source of Truth / DRY constants, Component Line Budget < 250 lines, Autonomous Self-Verification Loop, 5 States of UI).
+* **🌐 133+ Production-Grade Skills:** Combines Matt Pocock's complete engineering and productivity suite (TDD, Code Review, Architecture Deepening, Grilling), OpenDesign workflows, and 74 measured real-world brand design systems.
 
 ---
 
@@ -30,21 +30,25 @@
 
 ```
 creative-agent/
+├── rules/
+│   └── AGENTS.md              # Universal Polyglot Guardian (Layer 1 Standing Invariants)
 ├── skills/
 │   ├── design-systems/        # 74 Brand Design Systems (Spotify, Linear, Stripe, Apple, etc.)
 │   ├── engineering/           # 18 Matt Pocock Engineering Skills (TDD, Code Review, etc.)
 │   ├── productivity/          # 7 Matt Pocock Productivity Skills (Grill-Me, Handoff, etc.)
 │   ├── workflows/             # 10 OpenDesign Workflow Skills (Director, Deck, Wireframe, etc.)
-│   ├── adapters/              # Dynamic Framework Adapters (React, Rails, Vue, Svelte, HTML)
-│   └── core/                  # Anti-Slop Manifesto, Palette Craft, Typography, Micro-interactions
+│   ├── adapters/              # 12 Polyglot Framework Adapters (React, Rails, Laravel, Django, etc.)
+│   └── core/                  # Form Craft, 5-State UI, Zero-FOUC, Anti-Slop Manifesto, Palette Craft
 │
+├── commands/                  # 7 Multi-Agent Slash Commands (/design, /tdd, /review, /webperf)
 ├── .claude-plugin/            # Official Claude Code Plugin Manifest
 ├── .cursor-plugin/            # Cursor IDE Plugin Manifest
 ├── .codex-plugin/             # Codex CLI Manifest
 ├── install.sh                 # Multi-Agent Universal One-Liner Installer
 └── scripts/
     ├── build-design-skills.js # Automated spec generator for design systems
-    └── sync-upstream.sh       # Upstream sync pipeline
+    ├── validate-skills.mjs    # Automated quality gate test suite (npm test)
+    └── sync-upstream.sh       # Regression-safe upstream sync pipeline
 ```
 
 ---
@@ -162,20 +166,30 @@ Full catalog with color hexes, typography, and live references: **[Browse Design
 * `setup-opendesign` — Local output workspace initializer.
 * `run-opendesign` — Preview server launcher.
 
-### 🔌 Framework Adapters & Core Craft
-* `framework-detector` — Automatic repo stack discovery.
-* `design-picker` — Intelligent design system recommender & advisor.
-* `design-persist` — Master + Overrides pattern to eliminate multi-session design drift.
-* `ui-pre-delivery-check` — 7-point mandatory quality gate for UI code delivery.
-* `adapter-react-tailwind` — React / Next.js + Tailwind + shadcn/ui output.
+### 🔌 12 Polyglot Framework Adapters
+* `framework-detector` — Automatic repo stack discovery across 12+ frameworks.
+* `adapter-react-tailwind` — React / Next.js + Tailwind + modular Custom Hooks.
 * `adapter-rails-hotwire` — Rails ERB + Hotwire (Turbo/Stimulus) + Tailwind output.
-* `adapter-vue-nuxt` — Vue 3 / Nuxt Single File Components output.
+* `adapter-laravel-blade` — Laravel Blade + Livewire 3 + Alpine.js + Tailwind output.
+* `adapter-django-htmx` — Django Template Partials + HTMX + Tailwind output.
+* `adapter-vue-nuxt` — Vue 3 / Nuxt Single File Components + Composables output.
 * `adapter-svelte` — Svelte 5 (Runes) + SvelteKit output.
-* `adapter-react-native-expo` — React Native & Expo mobile UI output (StyleSheet / NativeWind).
+* `adapter-astro` — Astro Zero-JS Island Architecture + Content Collections.
+* `adapter-go-templ-htmx` — Go Templ type-safe components + HTMX output.
+* `adapter-flutter` — Flutter & Dart widgets + ThemeExtension tokens output.
+* `adapter-react-native-expo` — React Native & Expo mobile UI (StyleSheet / NativeWind).
 * `adapter-shadcn-ui` — Maps archetype tokens into existing shadcn/ui primitives.
 * `adapter-static-html` — Single-file standalone prototype output.
+
+### 🛡️ Core Craft & Quality Gates
+* `design-picker` — Intelligent design system recommender & advisor.
+* `design-persist` — Master + Overrides pattern to eliminate multi-session design drift.
+* `ui-pre-delivery-check` — 10-point mandatory quality & architecture gate.
+* `form-craft` — Resilient input engineering, explicit labels, and inline error states.
+* `ui-states-craft` — Complete 5-state UI implementation (Empty, Loading, Error, Overflow, Populated).
+* `zero-fouc-craft` — Zero-flash theme initialization for light/dark mode.
 * `anti-slop-manifesto` — Strict taste boundaries and negative constraints.
-* `palette-craft` — Accessible semantic color scale generator.
+* `palette-craft` — Accessible semantic color scale generator (WCAG 2.2 AA).
 * `typography-craft` — Mathematical type scale and optical tracking rules.
 * `micro-interactions` — Tactile hover/active states and spring physics.
 
@@ -191,7 +205,7 @@ npm test
 
 Expected output:
 ```
-✓ Audited 125 skills across all categories
+✓ Audited 133 skills across all categories
 ✓ Audited 7 slash commands
 ✅ All skills and commands passed validation with 0 errors!
 ```
