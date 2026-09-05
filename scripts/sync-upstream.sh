@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-# Syncs skills and design systems from upstream repositories
+# Syncs skills and design systems from upstream repositories while protecting creative-agent enhancements
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT_DIR="$(dirname "$SCRIPT_DIR")"
 TMP_DIR="/tmp/opencode/sync-upstream"
@@ -18,11 +18,23 @@ echo "Copying Matt Pocock skills..."
 cp -r mattpocock-skills/skills/engineering/* "$ROOT_DIR/skills/engineering/"
 cp -r mattpocock-skills/skills/productivity/* "$ROOT_DIR/skills/productivity/"
 
-echo "Copying OpenDesign workflow skills..."
+echo "Copying OpenDesign workflow skills (protecting native-first customizations)..."
+# Back up custom native-first files before sync
+TMP_BACKUP=$(mktemp -d)
+cp "$ROOT_DIR/skills/workflows/opendesign/SKILL.md" "$TMP_BACKUP/opendesign-skill.md"
+
+# Copy upstream workflows
 cp -r manalkaff-opendesign/skills/* "$ROOT_DIR/skills/workflows/"
 
-echo "Rebuilding design system catalog..."
+# Restore our native-first enhancements
+cp "$TMP_BACKUP/opendesign-skill.md" "$ROOT_DIR/skills/workflows/opendesign/SKILL.md"
+rm -rf "$TMP_BACKUP"
+
+echo "Rebuilding design system catalog with normalized names and guardrails..."
 cd "$ROOT_DIR"
 node scripts/build-design-skills.js
 
-echo "Sync completed successfully!"
+echo "Verifying all skills and commands..."
+node scripts/validate-skills.mjs
+
+echo "Sync and verification completed successfully!"
