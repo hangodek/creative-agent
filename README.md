@@ -182,6 +182,7 @@ Full catalog with color hexes, typography, and live references: **[Browse Design
 * `adapter-static-html` — Single-file standalone prototype output.
 
 ### 🛡️ Core Craft & Quality Gates
+* `code-refactor` — Proactive, behavior-preserving architecture cleanup and decomposition.
 * `design-picker` — Intelligent design system recommender & advisor.
 * `design-persist` — Master + Overrides pattern to eliminate multi-session design drift.
 * `ui-pre-delivery-check` — 10-point mandatory quality & architecture gate.
@@ -205,7 +206,7 @@ npm test
 
 Expected output:
 ```
-✓ Audited 133 skills across all categories
+✓ Audited 134 skills across all categories
 ✓ Audited 7 slash commands
 ✅ All skills and commands passed validation with 0 errors!
 ```
