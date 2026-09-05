@@ -6,6 +6,7 @@ set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 TARGET_MODE="${1:---auto}"
+EXTRA_PATH="$2"
 
 BOLD="\033[1m"
 GREEN="\033[0;32m"
@@ -18,54 +19,111 @@ echo -e "${BOLD}${BLUE}║             CREATIVE AGENT SKILLS INSTALLER          
 echo -e "${BOLD}${BLUE}╚════════════════════════════════════════════════════════╝${RESET}"
 echo ""
 
-install_to() {
+install_skills_to() {
   local target_dir="$1"
   local agent_name="$2"
   
   mkdir -p "$target_dir"
+  # Self-cleaning: remove any broken or stale symlinks first
+  find "$target_dir" -xtype l -delete 2>/dev/null || true
+
   echo -e "${BLUE}▶ Linking skills into ${BOLD}${agent_name}${RESET} (${target_dir})..."
   
-  # Link all skill subdirectories
+  local count=0
   for category in engineering productivity workflows adapters core design-systems; do
     if [ -d "$SCRIPT_DIR/skills/$category" ]; then
       for skill_path in "$SCRIPT_DIR/skills/$category"/*; do
         if [ -d "$skill_path" ]; then
           local skill_name=$(basename "$skill_path")
           ln -sfn "$skill_path" "$target_dir/$skill_name"
+          count=$((count + 1))
         fi
       done
     fi
   done
   
-  echo -e "${GREEN}✓ Successfully linked into ${agent_name}${RESET}"
+  echo -e "${GREEN}✓ Linked ${count} skills into ${agent_name}${RESET}"
 }
 
+install_commands_to() {
+  local target_dir="$1"
+  local agent_name="$2"
+  
+  if [ -d "$SCRIPT_DIR/commands" ]; then
+    mkdir -p "$target_dir"
+    find "$target_dir" -xtype l -delete 2>/dev/null || true
+    echo -e "${BLUE}▶ Linking slash commands into ${BOLD}${agent_name}${RESET} (${target_dir})..."
+    
+    local count=0
+    for cmd_path in "$SCRIPT_DIR/commands"/*.md; do
+      if [ -f "$cmd_path" ]; then
+        local cmd_name=$(basename "$cmd_path")
+        ln -sfn "$cmd_path" "$target_dir/$cmd_name"
+        count=$((count + 1))
+      fi
+    done
+    echo -e "${GREEN}✓ Linked ${count} commands (/design, /tdd, /review, etc.) into ${agent_name}${RESET}"
+  fi
+}
+
+# Project-Level Installation (--project or -p)
+if [ "$TARGET_MODE" == "--project" ] || [ "$TARGET_MODE" == "-p" ]; then
+  PROJECT_ROOT="${EXTRA_PATH:-$(pwd)}"
+  echo -e "${BLUE}Installing skills locally into project at: ${BOLD}${PROJECT_ROOT}${RESET}..."
+  
+  install_skills_to "$PROJECT_ROOT/.opencode/skills" "Project OpenCode"
+  install_commands_to "$PROJECT_ROOT/.opencode/command" "Project OpenCode Commands"
+  
+  if [ -d "$PROJECT_ROOT/.claude" ]; then
+    install_skills_to "$PROJECT_ROOT/.claude/skills" "Project Claude Code"
+  fi
+  
+  echo ""
+  echo -e "${GREEN}${BOLD}Project installation complete!${RESET}"
+  exit 0
+fi
+
+# Clean-only mode (--clean)
+if [ "$TARGET_MODE" == "--clean" ]; then
+  echo -e "${YELLOW}Cleaning broken symlinks across agent directories...${RESET}"
+  find "$HOME/.config/opencode/skills" -xtype l -delete 2>/dev/null || true
+  find "$HOME/.config/opencode/command" -xtype l -delete 2>/dev/null || true
+  find "$HOME/.agents/skills" -xtype l -delete 2>/dev/null || true
+  find "$HOME/.claude/skills" -xtype l -delete 2>/dev/null || true
+  find "$HOME/.claude/commands" -xtype l -delete 2>/dev/null || true
+  echo -e "${GREEN}Cleanup complete!${RESET}"
+  exit 0
+fi
+
+# Global Installation (Auto-Detect or Explicit)
 INSTALLED_COUNT=0
 
 # 1. Antigravity / Shared Agent Standard (~/.agents/skills)
 if [ -d "$HOME/.agents" ] || [ "$TARGET_MODE" == "--all" ] || [ "$TARGET_MODE" == "--agents" ]; then
-  install_to "$HOME/.agents/skills" "Antigravity & Agentic CLI"
+  install_skills_to "$HOME/.agents/skills" "Antigravity & Agentic CLI"
   INSTALLED_COUNT=$((INSTALLED_COUNT + 1))
 fi
 
-# 2. OpenCode (~/.config/opencode/skills)
+# 2. OpenCode (~/.config/opencode/skills & commands)
 if [ -d "$HOME/.config/opencode" ] || [ "$TARGET_MODE" == "--all" ] || [ "$TARGET_MODE" == "--opencode" ]; then
-  install_to "$HOME/.config/opencode/skills" "OpenCode (Global)"
+  install_skills_to "$HOME/.config/opencode/skills" "OpenCode"
+  install_commands_to "$HOME/.config/opencode/command" "OpenCode"
   INSTALLED_COUNT=$((INSTALLED_COUNT + 1))
 fi
 
-# 3. Claude Code (~/.claude/skills)
+# 3. Claude Code (~/.claude/skills & commands)
 if [ -d "$HOME/.claude" ] || [ "$TARGET_MODE" == "--all" ] || [ "$TARGET_MODE" == "--claude" ]; then
-  install_to "$HOME/.claude/skills" "Claude Code (Global)"
+  install_skills_to "$HOME/.claude/skills" "Claude Code"
+  install_commands_to "$HOME/.claude/commands" "Claude Code"
   INSTALLED_COUNT=$((INSTALLED_COUNT + 1))
 fi
 
 # Fallback: If nothing was detected, install into ~/.agents/skills as universal default
 if [ $INSTALLED_COUNT -eq 0 ]; then
   echo -e "${YELLOW}No existing agent folder detected. Creating universal default in ~/.agents/skills...${RESET}"
-  install_to "$HOME/.agents/skills" "Universal Agents Standard"
+  install_skills_to "$HOME/.agents/skills" "Universal Agents Standard"
 fi
 
 echo ""
-echo -e "${GREEN}${BOLD}Done! 100+ skills (74 brand design systems, 25 engineering/productivity skills, and dynamic framework adapters) are now live.${RESET}"
-echo -e "Restart your agent or CLI session to start using them."
+echo -e "${GREEN}${BOLD}Done! 120+ skills and slash commands are live and ready.${RESET}"
+echo -e "Restart your agent session to start using commands like ${BOLD}/design${RESET}, ${BOLD}/tdd${RESET}, and ${BOLD}/review${RESET}."

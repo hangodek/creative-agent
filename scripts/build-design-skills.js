@@ -3,7 +3,7 @@ import path from 'path';
 
 const SRC_DIR = '/tmp/opencode/upstream/voltagent-design-md/design-md';
 const README_PATH = '/tmp/opencode/upstream/voltagent-design-md/README.md';
-const DEST_DIR = '/home/han/godek/projects/creative-agent/skills/design-systems';
+const DEST_DIR = path.resolve(process.cwd(), 'skills/design-systems');
 
 // Slugs mapping for clean skill names
 const SLUG_MAP = {
@@ -29,6 +29,19 @@ const CATEGORIES = {
 };
 
 function parseDescriptions() {
+  if (!fs.existsSync(README_PATH)) {
+    // Fallback to existing catalog.json if upstream README is not currently cloned
+    const catalogFile = path.join(DEST_DIR, 'catalog.json');
+    if (fs.existsSync(catalogFile)) {
+      const existing = JSON.parse(fs.readFileSync(catalogFile, 'utf8'));
+      const map = {};
+      for (const item of existing) {
+        map[item.slug] = { brand: item.brand, desc: item.description };
+      }
+      return map;
+    }
+    return {};
+  }
   const readme = fs.readFileSync(README_PATH, 'utf8');
   const map = {};
   const regex = /- \[?\*\*([^\]*]+)\*\*\]?\(https:\/\/getdesign\.md\/([^/]+)\/design-md\)\s*-\s*(.+)/g;
@@ -45,7 +58,6 @@ function parseDescriptions() {
 }
 
 function normalizeContent(rawContent) {
-  // If file starts with YAML frontmatter, strip it and capture body
   if (rawContent.startsWith('---')) {
     const end = rawContent.indexOf('---', 3);
     if (end !== -1) {
@@ -65,16 +77,20 @@ function getCategory(slug) {
 function main() {
   fs.mkdirSync(DEST_DIR, { recursive: true });
   const descriptions = parseDescriptions();
-  const entries = fs.readdirSync(SRC_DIR, { withFileTypes: true });
+  
+  // If upstream exists, read from upstream; otherwise normalize in DEST_DIR
+  const readDir = fs.existsSync(SRC_DIR) ? SRC_DIR : DEST_DIR;
+  const entries = fs.readdirSync(readDir, { withFileTypes: true });
 
   const catalog = [];
   let count = 0;
 
   for (const entry of entries) {
     if (!entry.isDirectory()) continue;
-    const rawSlug = entry.name;
-    const cleanSlug = SLUG_MAP[rawSlug] || rawSlug;
-    const sourceFolder = path.join(SRC_DIR, rawSlug);
+    const rawName = entry.name;
+    const cleanSlug = rawName.replace(/^design-/, '');
+    const mappedSlug = SLUG_MAP[cleanSlug] || cleanSlug;
+    const sourceFolder = path.join(readDir, rawName);
     const designMdPath = path.join(sourceFolder, 'DESIGN.md');
 
     if (!fs.existsSync(designMdPath)) continue;
@@ -82,26 +98,33 @@ function main() {
     const rawContent = fs.readFileSync(designMdPath, 'utf8');
     const contentBody = normalizeContent(rawContent);
 
-    const meta = descriptions[cleanSlug] || descriptions[rawSlug] || {
-      brand: cleanSlug.charAt(0).toUpperCase() + cleanSlug.slice(1),
-      desc: `Visual design system and tokens inspired by ${cleanSlug}.`
+    const meta = descriptions[mappedSlug] || descriptions[rawName] || {
+      brand: mappedSlug.charAt(0).toUpperCase() + mappedSlug.slice(1),
+      desc: `Visual design system and tokens inspired by ${mappedSlug}.`
     };
 
-    const targetFolder = path.join(DEST_DIR, cleanSlug);
+    const targetDirName = `design-${mappedSlug}`;
+    const targetFolder = path.join(DEST_DIR, targetDirName);
     fs.mkdirSync(targetFolder, { recursive: true });
 
     // Copy raw DESIGN.md
     fs.writeFileSync(path.join(targetFolder, 'DESIGN.md'), rawContent);
 
     // Build frontmatter for SKILL.md
-    const skillName = `design-${cleanSlug}`;
-    const sanitizedDesc = meta.desc.replace(/"/g, "'").replace(/\n/g, ' ');
-    const fullDescription = `Apply the ${meta.brand} design system: ${sanitizedDesc} Use when designing UI components, landing pages, dashboards, or full applications in the ${meta.brand} aesthetic. Trigger on "${meta.brand}", "${cleanSlug}", or requests matching this visual language.`;
+    const skillName = targetDirName;
+    const cleanDesc = meta.desc.replace(/"/g, "'").replace(/\n/g, ' ');
 
     const skillContent = `---
 name: ${skillName}
-description: "${fullDescription}"
+description: >
+  Apply the ${meta.brand} design system: ${cleanDesc}
+  Use when designing UI components, pages, dashboards, or full applications in the ${meta.brand} aesthetic.
+  Trigger on "${meta.brand}", "${mappedSlug}", or requests matching this visual language.
 ---
+
+> **CRITICAL ARCHITECTURE GUARDRAIL FOR AI CODING AGENTS:**
+> DO NOT install external third-party vendor packages (such as \`@shopify/polaris\`, \`@stripe/stripe-js\`, or proprietary UI kits) unless explicitly demanded by the user.
+> ALWAYS apply this design system's aesthetic, colors, typography, and geometry natively using the project's existing styling engine (Tailwind CSS, native CSS, or framework adapters)!
 
 ${contentBody}
 `;
@@ -109,11 +132,11 @@ ${contentBody}
     fs.writeFileSync(path.join(targetFolder, 'SKILL.md'), skillContent);
 
     catalog.push({
-      slug: cleanSlug,
+      slug: mappedSlug,
       skill: skillName,
       brand: meta.brand,
       description: meta.desc,
-      category: getCategory(cleanSlug),
+      category: getCategory(mappedSlug),
     });
 
     count++;
@@ -142,7 +165,7 @@ ${contentBody}
 
   fs.writeFileSync(path.join(DEST_DIR, 'INDEX.md'), indexMd);
 
-  console.log(`Successfully generated ${count} design system skills in ${DEST_DIR}`);
+  console.log(`Successfully generated and consolidated ${count} design system skills in ${DEST_DIR}`);
 }
 
 main();
