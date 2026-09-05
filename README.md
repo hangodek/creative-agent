@@ -59,6 +59,11 @@ cd creative-agent
 ./install.sh
 ```
 
+To install into your current project only (creates `.opencode/skills` and `.opencode/command`):
+```bash
+./install.sh --project
+```
+
 ### Option 2: Claude Code Plugin
 From inside Claude Code:
 ```bash
@@ -77,22 +82,25 @@ npx skills@latest add hangodek/creative-agent
 
 You do not need to memorize commands. Skills are triggered through **Natural Intent**, **Slash Commands**, or **Autonomous Routing**:
 
-### 1. Natural Language (Model-Invoked)
+### 1. Slash Commands (Instant CLI Shortcuts)
+Pre-configured commands installed directly into your agent's command palette:
+* `/design <brand|intent>` — Apply any design system (e.g. `/design linear`, `/design spotify`, `/design fintech`).
+* `/tdd <feature>` — Red-Green-Refactor loop with automatic test verification.
+* `/review [target]` — Two-axis pull request audit (Standards & Intent).
+* `/grill <plan>` — Relentless requirement interrogation before coding.
+* `/wireframe <concept>` — Generate 3 distinct architectural layout variations.
+* `/deck <topic>` — Generate 1920×1080 HTML presentation decks.
+
+### 2. Natural Language (Model-Invoked)
 Simply describe what you want in your natural workflow:
 * *"Build a music player and playlist overview with the **Spotify** aesthetic."*  
   *(Agent triggers `design-spotify` + `framework-detector` + `anti-slop-manifesto`)*
 * *"Refactor our billing view using **Stripe**'s clean light typography."*  
   *(Agent triggers `design-stripe` + `typography-craft`)*
+* *"Recommend the best design system for my B2B analytics tool."*  
+  *(Agent triggers `design-picker` to suggest 1 primary + 2 contrasting archetypes)*
 * *"Let's build this feature using test-driven development."*  
   *(Agent triggers `tdd`)*
-
-### 2. Direct Commands (User-Invoked)
-* `/tdd` — Run disciplined Red-Green-Refactor loop.
-* `/grill-me` — Relentlessly interview you to eliminate ambiguity before coding.
-* `/code-review` — Two-axis pull request review (Standards + Spec adherence).
-* `/improve-codebase-architecture` — Survey codebase for deepening opportunities.
-* `/wireframe` — Generate rapid, low-fidelity structural variations.
-* `/make-a-deck` — Create high-impact 1920×1080 slide presentations.
 
 ---
 
@@ -147,12 +155,14 @@ Full catalog with color hexes, typography, and live references: **[Browse Design
 * `interactive-prototype` — Standalone clickable prototypes.
 * `make-a-deck` — 1920×1080 slide decks.
 * `make-tweakable` — Interactive in-browser variant toggles.
+* `handoff-to-dev` — Universal developer handoff spec generator.
 * `handoff-to-claude-code` — Specification generator for engineering handoff.
 * `setup-opendesign` — Local output workspace initializer.
 * `run-opendesign` — Preview server launcher.
 
 ### 🔌 Framework Adapters & Core Craft
 * `framework-detector` — Automatic repo stack discovery.
+* `design-picker` — Intelligent design system recommender & advisor.
 * `adapter-react-tailwind` — React / Next.js + Tailwind + shadcn/ui output.
 * `adapter-rails-hotwire` — Rails ERB + Hotwire (Turbo/Stimulus) + Tailwind output.
 * `adapter-vue-nuxt` — Vue 3 / Nuxt Single File Components output.
@@ -162,6 +172,23 @@ Full catalog with color hexes, typography, and live references: **[Browse Design
 * `palette-craft` — Accessible semantic color scale generator.
 * `typography-craft` — Mathematical type scale and optical tracking rules.
 * `micro-interactions` — Tactile hover/active states and spring physics.
+
+---
+
+## 🧪 Quality Assurance & Testing
+
+Every skill and slash command in this repository is automatically validated against strict schema rules (YAML frontmatter syntax, name-folder symmetry, character limits, and non-empty markdown bodies):
+
+```bash
+npm test
+```
+
+Expected output:
+```
+✓ Audited 121 skills across all categories
+✓ Audited 6 slash commands
+✅ All skills and commands passed validation with 0 errors!
+```
 
 ---
 
