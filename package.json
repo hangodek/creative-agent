@@ -1,0 +1,29 @@
+{
+  "name": "creative-agent",
+  "version": "1.0.0",
+  "description": "Universal Agent Skills Engine for engineering excellence & world-class design systems",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hangodek/creative-agent.git"
+  },
+  "author": "hangodek",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "build:designs": "node scripts/build-design-skills.js",
+    "sync:upstream": "bash scripts/sync-upstream.sh",
+    "install:skills": "bash install.sh"
+  },
+  "keywords": [
+    "skills",
+    "ai-agent",
+    "claude-code",
+    "opencode",
+    "cursor",
+    "antigravity",
+    "design-systems",
+    "engineering",
+    "tdd",
+    "anti-slop"
+  ]
+}

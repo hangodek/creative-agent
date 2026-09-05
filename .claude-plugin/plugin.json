@@ -1,0 +1,26 @@
+{
+  "name": "creative-agent",
+  "description": "Universal Agent Skills Engine for engineering excellence & world-class design systems. Combines Matt Pocock's engineering/productivity skills, OpenDesign workflows, 74+ verified brand design systems, dynamic framework adapters (React, Rails, Vue, Svelte), and anti-slop craft guardrails.",
+  "version": "1.0.0",
+  "author": {
+    "name": "hangodek",
+    "url": "https://github.com/hangodek"
+  },
+  "homepage": "https://github.com/hangodek/creative-agent",
+  "repository": "https://github.com/hangodek/creative-agent",
+  "license": "MIT",
+  "keywords": [
+    "claude-code",
+    "opencode",
+    "skills",
+    "design-systems",
+    "engineering",
+    "tdd",
+    "anti-slop",
+    "react",
+    "rails",
+    "vue",
+    "svelte",
+    "tailwind"
+  ]
+}

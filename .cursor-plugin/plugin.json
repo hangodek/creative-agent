@@ -1,0 +1,8 @@
+{
+  "name": "creative-agent",
+  "displayName": "Creative Agent",
+  "description": "Universal Agent Skills Engine: 74+ Brand Design Systems, Matt Pocock Engineering Skills, Framework Adapters, and Anti-Slop Guardrails.",
+  "version": "1.0.0",
+  "publisher": "hangodek",
+  "repository": "https://github.com/hangodek/creative-agent"
+}
