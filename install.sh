@@ -66,16 +66,29 @@ install_commands_to() {
   fi
 }
 
+install_rules_to() {
+  local target_file="$1"
+  local agent_name="$2"
+  
+  if [ -f "$SCRIPT_DIR/rules/AGENTS.md" ]; then
+    mkdir -p "$(dirname "$target_file")"
+    ln -sfn "$SCRIPT_DIR/rules/AGENTS.md" "$target_file"
+    echo -e "${GREEN}✓ Linked Universal Polyglot Guardian (AGENTS.md) into ${agent_name}${RESET}"
+  fi
+}
+
 # Project-Level Installation (--project or -p)
 if [ "$TARGET_MODE" == "--project" ] || [ "$TARGET_MODE" == "-p" ]; then
   PROJECT_ROOT="${EXTRA_PATH:-$(pwd)}"
-  echo -e "${BLUE}Installing skills locally into project at: ${BOLD}${PROJECT_ROOT}${RESET}..."
+  echo -e "${BLUE}Installing skills & rules locally into project at: ${BOLD}${PROJECT_ROOT}${RESET}..."
   
   install_skills_to "$PROJECT_ROOT/.opencode/skills" "Project OpenCode"
   install_commands_to "$PROJECT_ROOT/.opencode/command" "Project OpenCode Commands"
+  install_rules_to "$PROJECT_ROOT/AGENTS.md" "Project Root"
   
   if [ -d "$PROJECT_ROOT/.claude" ]; then
     install_skills_to "$PROJECT_ROOT/.claude/skills" "Project Claude Code"
+    install_rules_to "$PROJECT_ROOT/.claude/AGENTS.md" "Project Claude Code"
   fi
   
   echo ""
@@ -101,6 +114,7 @@ INSTALLED_COUNT=0
 # 1. Antigravity / Shared Agent Standard (~/.agents/skills)
 if [ -d "$HOME/.agents" ] || [ "$TARGET_MODE" == "--all" ] || [ "$TARGET_MODE" == "--agents" ]; then
   install_skills_to "$HOME/.agents/skills" "Antigravity & Agentic CLI"
+  install_rules_to "$HOME/.agents/AGENTS.md" "Antigravity & Agentic CLI"
   INSTALLED_COUNT=$((INSTALLED_COUNT + 1))
 fi
 
@@ -108,6 +122,7 @@ fi
 if [ -d "$HOME/.config/opencode" ] || [ "$TARGET_MODE" == "--all" ] || [ "$TARGET_MODE" == "--opencode" ]; then
   install_skills_to "$HOME/.config/opencode/skills" "OpenCode"
   install_commands_to "$HOME/.config/opencode/command" "OpenCode"
+  install_rules_to "$HOME/.config/opencode/AGENTS.md" "OpenCode"
   INSTALLED_COUNT=$((INSTALLED_COUNT + 1))
 fi
 
@@ -115,6 +130,7 @@ fi
 if [ -d "$HOME/.claude" ] || [ "$TARGET_MODE" == "--all" ] || [ "$TARGET_MODE" == "--claude" ]; then
   install_skills_to "$HOME/.claude/skills" "Claude Code"
   install_commands_to "$HOME/.claude/commands" "Claude Code"
+  install_rules_to "$HOME/.claude/AGENTS.md" "Claude Code"
   INSTALLED_COUNT=$((INSTALLED_COUNT + 1))
 fi
 
@@ -122,8 +138,9 @@ fi
 if [ $INSTALLED_COUNT -eq 0 ]; then
   echo -e "${YELLOW}No existing agent folder detected. Creating universal default in ~/.agents/skills...${RESET}"
   install_skills_to "$HOME/.agents/skills" "Universal Agents Standard"
+  install_rules_to "$HOME/.agents/AGENTS.md" "Universal Agents Standard"
 fi
 
 echo ""
-echo -e "${GREEN}${BOLD}Done! 120+ skills and slash commands are live and ready.${RESET}"
+echo -e "${GREEN}${BOLD}Done! 120+ skills, slash commands, and Universal Polyglot Guardian rules are live.${RESET}"
 echo -e "Restart your agent session to start using commands like ${BOLD}/design${RESET}, ${BOLD}/tdd${RESET}, and ${BOLD}/review${RESET}."
