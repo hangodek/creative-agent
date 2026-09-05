@@ -4,7 +4,8 @@
 > Built for AI coding agents: **OpenCode**, **Claude Code**, **Antigravity**, **Cursor**, and **Codex CLI**.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Skills Count](https://img.shields.io/badge/Total%20Skills-115%2B-emerald.svg)](#skills-catalog)
+[![CI](https://github.com/hangodek/creative-agent/actions/workflows/ci.yml/badge.svg)](https://github.com/hangodek/creative-agent/actions/workflows/ci.yml)
+[![Skills Count](https://img.shields.io/badge/Total%20Skills-125%2B-emerald.svg)](#skills-catalog)
 [![Design Systems](https://img.shields.io/badge/Design%20Systems-74%20Brands-purple.svg)](skills/design-systems/INDEX.md)
 [![Multi-Agent Ready](https://img.shields.io/badge/Multi--Agent-OpenCode%20%7C%20Claude%20Code%20%7C%20Cursor%20%7C%20Antigravity-orange.svg)](#installation)
 
@@ -90,6 +91,7 @@ Pre-configured commands installed directly into your agent's command palette:
 * `/grill <plan>` — Relentless requirement interrogation before coding.
 * `/wireframe <concept>` — Generate 3 distinct architectural layout variations.
 * `/deck <topic>` — Generate 1920×1080 HTML presentation decks.
+* `/webperf [target]` — Core Web Vitals (LCP, CLS, INP) audit, dark mode FOUC check, and bundle profiling.
 
 ### 2. Natural Language (Model-Invoked)
 Simply describe what you want in your natural workflow:
@@ -163,10 +165,14 @@ Full catalog with color hexes, typography, and live references: **[Browse Design
 ### 🔌 Framework Adapters & Core Craft
 * `framework-detector` — Automatic repo stack discovery.
 * `design-picker` — Intelligent design system recommender & advisor.
+* `design-persist` — Master + Overrides pattern to eliminate multi-session design drift.
+* `ui-pre-delivery-check` — 7-point mandatory quality gate for UI code delivery.
 * `adapter-react-tailwind` — React / Next.js + Tailwind + shadcn/ui output.
 * `adapter-rails-hotwire` — Rails ERB + Hotwire (Turbo/Stimulus) + Tailwind output.
 * `adapter-vue-nuxt` — Vue 3 / Nuxt Single File Components output.
 * `adapter-svelte` — Svelte 5 (Runes) + SvelteKit output.
+* `adapter-react-native-expo` — React Native & Expo mobile UI output (StyleSheet / NativeWind).
+* `adapter-shadcn-ui` — Maps archetype tokens into existing shadcn/ui primitives.
 * `adapter-static-html` — Single-file standalone prototype output.
 * `anti-slop-manifesto` — Strict taste boundaries and negative constraints.
 * `palette-craft` — Accessible semantic color scale generator.
@@ -185,8 +191,8 @@ npm test
 
 Expected output:
 ```
-✓ Audited 121 skills across all categories
-✓ Audited 6 slash commands
+✓ Audited 125 skills across all categories
+✓ Audited 7 slash commands
 ✅ All skills and commands passed validation with 0 errors!
 ```
 
