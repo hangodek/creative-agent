@@ -1,37 +1,44 @@
 ---
 name: framework-detector
-description: "Automatically inspects the current repository to detect the frontend framework (React, Next.js, Rails Hotwire, Vue, Nuxt, Svelte, SvelteKit, or static HTML), CSS engine (Tailwind v3/v4, CSS Modules, Vanilla CSS), and installed UI / icon libraries before writing UI code."
+description: >
+  Automatically inspects the current repository to detect the frontend or fullstack framework
+  (React, Next.js, Rails Hotwire, Laravel Blade, Django HTMX, Vue, Nuxt, Svelte 5, Astro, Go Templ,
+  Flutter, React Native/Expo, or static HTML), CSS engine (Tailwind v3/v4, CSS Modules), and installed UI libraries.
 ---
 
 # Framework Detector Skill
 
-Before generating or refactoring any user interface code, you MUST inspect the current workspace environment to determine the native tech stack. NEVER output generic raw HTML when the repository is built on a specific framework like React, Rails, Vue, or Svelte.
+Before generating or refactoring any user interface code, you MUST inspect the current workspace environment to determine the native tech stack. NEVER output generic raw HTML when the repository is built on an established framework.
 
 ## Inspection Checklist
 
 Execute these checks in parallel using your search and read tools:
 
 1. **Manifest Files:**
-   - `package.json` -> Check dependencies: `react`, `next`, `vue`, `nuxt`, `svelte`, `@sveltejs/kit`, `tailwindcss`, `lucide-react`, `@radix-ui/*`, `@shadcn/ui`.
-   - `Gemfile` -> Check gems: `rails`, `tailwindcss-rails`, `hotwire-rails`, `stimulus-rails`, `view_component`, `phlex-rails`.
-   - `pyproject.toml` / `requirements.txt` -> Check frameworks: `django`, `flask`, `fastapi`, `jinja2`.
+   - `package.json` -> Check: `react`, `next`, `vue`, `nuxt`, `svelte`, `astro`, `react-native`, `expo`, `tailwindcss`, `lucide-react`, `@shadcn/ui`.
+   - `Gemfile` -> Check: `rails`, `tailwindcss-rails`, `hotwire-rails`, `stimulus-rails`, `view_component`, `phlex-rails`.
    - `composer.json` -> Check: `laravel/framework`, `livewire/livewire`, `blade`.
+   - `pyproject.toml` / `requirements.txt` -> Check: `django`, `flask`, `fastapi`, `jinja2`.
+   - `go.mod` -> Check Go dependencies, `templ`, or standard `html/template`.
+   - `pubspec.yaml` -> Check: `flutter`, `flutter_riverpod`, `flutter_bloc`.
+   - `Cargo.toml` -> Check: `leptos`, `dioxus`, `askama`.
 
 2. **Styling Engine:**
-   - Look for `tailwind.config.js`, `tailwind.config.ts`, or `@import "tailwindcss";` in `src/`, `app/assets/stylesheets/`, or `app/globals.css`.
-   - Check if Tailwind version is v3 (`@tailwind base;`) or v4 (`@import "tailwindcss";`).
-   - Check for component libraries: look for `@/components/ui/` (standard shadcn/ui folder).
+   - Check Tailwind version: v3 (`tailwind.config.*`) or v4 (`@import "tailwindcss";`).
+   - Check component libraries: `@/components/ui/` (shadcn/ui), Radix UI, PrimeVue, DaisyUI.
 
-3. **Icon Library Discovery:**
-   - If `lucide-react` is present: import `{ IconName } from "lucide-react"`.
-   - If `heroicons` or `@heroicons/react` is present: import from `@heroicons/react/24/outline`.
-   - If Rails: check if `heroicon` or `lucide` gem is available, or use clean inline SVGs with standard viewBox `0 0 24 24`.
+3. **Icon Discovery:**
+   - Detect Lucide, Heroicons, Phosphor, or framework-specific icon libraries.
 
-4. **Component Location:**
-   - React / Next.js: `app/` (App Router) or `pages/` (Pages Router) or `src/components/`.
-   - Rails: `app/views/` and `app/components/` (if ViewComponent).
-   - Vue / Nuxt: `components/` and `pages/`.
-   - Svelte / SvelteKit: `src/routes/` and `src/lib/components/`.
-
-## Translation Rule
-Once the stack is identified, translate the design tokens (from the active design system skill) directly into native components matching that stack.
+4. **Adapter Routing Table:**
+   - React / Next.js -> `adapter-react-tailwind` / `adapter-shadcn-ui`
+   - Ruby on Rails -> `adapter-rails-hotwire`
+   - Laravel PHP -> `adapter-laravel-blade`
+   - Python Django -> `adapter-django-htmx`
+   - Vue 3 / Nuxt -> `adapter-vue-nuxt`
+   - Svelte 5 / Kit -> `adapter-svelte`
+   - Astro -> `adapter-astro`
+   - Go -> `adapter-go-templ-htmx`
+   - React Native / Expo -> `adapter-react-native-expo`
+   - Flutter / Dart -> `adapter-flutter`
+   - Raw HTML -> `adapter-static-html`
