@@ -77,6 +77,29 @@ install_rules_to() {
   fi
 }
 
+configure_opencode_json() {
+  local cfg_file="$HOME/.config/opencode/opencode.json"
+  if [ -f "$cfg_file" ]; then
+    node -e "
+      const fs = require('fs');
+      try {
+        const file = '$cfg_file';
+        const raw = fs.readFileSync(file, 'utf8');
+        const json = JSON.parse(raw);
+        json.instructions = json.instructions || [];
+        const rulePath = '$SCRIPT_DIR/rules/AGENTS.md';
+        if (!json.instructions.includes(rulePath)) {
+          json.instructions.unshift(rulePath);
+        }
+        fs.writeFileSync(file, JSON.stringify(json, null, 2));
+        console.log('✓ Registered creative-agent rules in ~/.config/opencode/opencode.json instructions');
+      } catch (e) {
+        console.error('Warning: could not update opencode.json:', e.message);
+      }
+    " 2>/dev/null || true
+  fi
+}
+
 # Project-Level Installation (--project or -p)
 if [ "$TARGET_MODE" == "--project" ] || [ "$TARGET_MODE" == "-p" ]; then
   PROJECT_ROOT="${EXTRA_PATH:-$(pwd)}"
@@ -123,6 +146,7 @@ if [ -d "$HOME/.config/opencode" ] || [ "$TARGET_MODE" == "--all" ] || [ "$TARGE
   install_skills_to "$HOME/.config/opencode/skills" "OpenCode"
   install_commands_to "$HOME/.config/opencode/command" "OpenCode"
   install_rules_to "$HOME/.config/opencode/AGENTS.md" "OpenCode"
+  configure_opencode_json
   INSTALLED_COUNT=$((INSTALLED_COUNT + 1))
 fi
 
