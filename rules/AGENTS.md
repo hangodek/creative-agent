@@ -72,6 +72,8 @@ These standing invariants apply across every programming language, framework, an
   - *React / Next.js with shadcn/ui:* When a primitive (Dialog, Sheet, DropdownMenu, Tabs, Toast) is needed, ALWAYS check `@/components/ui/` first; if absent, execute `npx shadcn@latest add <component>` rather than copy-pasting an unvetted or inaccessible custom implementation.
   - *Go with Templ:* Always execute `templ generate` after adding or editing `.templ` component files before compiling.
   - *Flutter / Dart:* Use `dart run build_runner build` for code generators (Freezed, JSON serializable, Riverpod).
+  - *Bun / Hono / Solid:* Configure matching `jsxImportSource` in `tsconfig.json` (`hono/jsx`, `solid-js`) to prevent missing runtime errors.
+  - *Non-DOM Terminal UIs:* When writing console/TUI apps, translate `MASTER.md` tokens into ANSI TrueColor codes (`\033[38;2;...m`) and Unicode box-drawing primitives (`┌ ─ ┐ │ └ ┘`).
 - **Strict Convention over Configuration:** Adhere strictly to the framework's native casing, naming, and directory patterns (snake_case in Rails/Python, PascalCase in React/Vue/Svelte, kebab-case in Angular/Astro).
 
 ---
@@ -79,11 +81,13 @@ These standing invariants apply across every programming language, framework, an
 ## 7. Autonomous Self-Verification Loop
 - **Verify before declaring completion.** Always execute the project's build, compile, or lint command autonomously:
   - *Node / TypeScript:* `npm run build` or `npx tsc --noEmit`.
-  - *Ruby on Rails:* `bin/rails zeitwerk:check`.
+  - *Bun:* `bun test` or `bun run check`.
+  - *Deno:* `deno check` or `deno test`.
+  - *Rust:* `cargo test` or `cargo check`.
+  - *Ruby on Rails / Sinatra:* `bin/rails zeitwerk:check` or `ruby test/*_test.rb` (with `ENV['RACK_ENV'] = 'test'`).
   - *Laravel:* `php artisan test` or `composer validate`.
-  - *Python / Django:* `python manage.py check` or `ruff check`.
-  - *Go:* `go vet ./...`.
-  - *Rust:* `cargo check`.
+  - *Python / Django / FastAPI:* `python3 -m unittest` or `python3 -m py_compile` or `ruff check`.
+  - *Go:* `go test ./...` and `go vet ./...`.
   - *Flutter:* `flutter analyze`.
 - If errors or warnings occur, fix them autonomously before reporting back to the user. Never hand off broken code.
 
