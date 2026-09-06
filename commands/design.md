@@ -19,7 +19,7 @@ Instructions:
 2. **Resolve Design System & Establish Master Contract:**
    - If the user specified a brand (e.g. "linear", "spotify", "stripe", "apple", "supabase", etc.), invoke `skill: design-<brand>`.
    - If the user described a mood/niche without naming a brand, invoke `skill: design-picker` to offer 2-3 tailored choices.
-   - Once aligned, write `design-system/MASTER.md` at the project root to lock in the chosen archetype tokens.
+   - Once aligned, write the comprehensive `design-system/MASTER.md` at the project root as the single canonical source of truth (covering Palette Roles, Mathematical Typography Scale with tracking, Geometry & Padding Grammar, and Interaction States). NEVER fragment into competing files.
 3. **Inspect Codebase:**
    - Invoke `skill: framework-detector` to discover the active stack (React/Next.js, Rails, Laravel, Django, Vue, Svelte, etc.) and installed styling/icon libraries.
 4. **Execute Native-First:**

@@ -8,6 +8,13 @@ These standing invariants apply across every programming language, framework, an
 - **EVERY project MUST have `AGENTS.md` at its root.** This guarantees the project is 100% self-contained across any developer, machine, or agentic session.
 - **Canonical Copy Rule:** When writing `AGENTS.md` to a project root, ALWAYS copy the FULL canonical document (all 11 sections). NEVER write a truncated or partial 5-line summary.
 - **UI Projects Contract:** Every project with a user interface MUST have `design-system/MASTER.md`.
+  - **The True Canonical `MASTER.md` Standard (Single Source of Truth):**
+    - **Zero Fragmentation:** NEVER split design specifications across competing files (e.g. `DESIGN.md` vs `MASTER.md` vs `GUIDELINES.md`). Doing so creates dual-source ambiguity and causes the AI to guess typography and padding.
+    - **The 4 Required Pillars of `MASTER.md`:** `design-system/MASTER.md` must be written as a comprehensive, self-contained specification covering:
+      1. *Palette Roles:* Exact hex codes for canvas floor, surface 1–4 ladder, hairlines, text hierarchy (primary/muted/subtle), and accent CTA.
+      2. *Mathematical Typography Scale:* Explicit matrix of Role, Font Family, Size, Weight, Line Height, and Letter Spacing (negative tracking).
+      3. *Geometry & Spacing Grammar:* Exact dimensions for buttons (height, padding, radius), cards (padding, radius, border), inputs, and focus rings.
+      4. *Interaction States:* Hover lift hexes, active scale transforms (`active:scale-[0.98]`), and smooth transitions (`duration-150`).
   - **Scenario A — Direct Build Requests** (e.g. *"make me a simple html js + css todolist app"*, *"build a dashboard"*):
     - Do NOT stall in repetitive generic approval loops.
     - Automatically pick the best matching design archetype from the 74-brand catalog (e.g. *Spotify* for dark media, *Linear* for precision dark, *Wired/Substack* for editorial, *Stripe* for clean light).

@@ -29,6 +29,7 @@
 * **🔬 Empirically Proven Across 10 Polyglot Paradigms:** 100% verified test-passing across Bun 1.4, Rust 1.98 (Axum), Deno 2.9 (native TS), Ruby 4.0 (Sinatra), Python 3.14 (FastAPI/HTMX), Go 1.27 (stdlib), SolidJS, Astro 5, Vanilla Web Components, and Terminal Console TUIs (ANSI TrueColor).
 * **🌐 Zero-Day Mimicry Fallback:** When encountering an unknown, emerging, or day-old framework, never falls back to raw HTML. Dynamically probes neighboring code patterns and extracts build scripts from manifests.
 * **🏛️ Deep Architectural Intake (The 5-Pillar Rule):** Bans shallow AI guesswork on broad requests (*"build an app called X"*). Mandates a structured 5–8 question questionnaire (View Scope, 60-Sec User Journey, Data Persistence, Auth Model, Tailored Design Archetype) with opinionated recommended defaults for instant execution.
+* **📐 The True Canonical `MASTER.md` Standard:** Zero design fragmentation. Banned splitting tokens across competing files (`DESIGN.md` vs `MASTER.md`). Every UI project establishes a single, comprehensive `design-system/MASTER.md` covering exact Palette Roles, Mathematical Typography Scales (with letter-spacing tracking), Geometry & Padding Grammar, and Interaction States.
 
 ---
 
