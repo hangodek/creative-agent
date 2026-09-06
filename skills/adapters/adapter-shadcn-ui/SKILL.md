@@ -39,3 +39,10 @@ Rather than recreating buttons or modals from raw HTML elements, compose existin
 
 ## 2. Core Rule
 NEVER delete or bypass shadcn's Radix UI accessibility attributes (`aria-*`, keyboard navigation focus rings). Layer the design system's aesthetic over the accessible primitive.
+
+---
+
+## 3. Official CLI Generator First
+When a primitive (Dialog, Sheet, DropdownMenu, Tabs, Toast, Table) is required by the user's design but absent from `@/components/ui/`:
+- ALWAYS execute `npx shadcn@latest add <component>` via `bash` to install the official, accessible Radix-backed primitive.
+- NEVER handcraft raw, inaccessible modal or dropdown replacements when shadcn CLI is available.

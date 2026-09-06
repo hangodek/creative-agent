@@ -35,3 +35,9 @@ Use this skill when generating UI code in a Ruby on Rails application.
 5. **Icon Integration:**
    - If `heroicon` or `lucide` view helpers are installed, use them: `<%= lucide_icon "play", class: "w-5 h-5" %>`.
    - Otherwise, generate clean, accessible SVG snippets with `aria-hidden="true"`.
+
+6. **Built-in CLI Generators & Zeitwerk Autoloading:**
+   - ALWAYS execute `bin/rails generate stimulus <name>` to scaffold Stimulus controllers so that asset pipelines and manifest loaders automatically register them.
+   - ALWAYS execute `bin/rails generate component <Name>` when using ViewComponent.
+   - NEVER create files that disrupt Zeitwerk naming conventions (e.g. `UserTasks` must be `user_tasks.rb`).
+   - Run `bin/rails zeitwerk:check` to autonomously verify file autoloading integrity before completing.

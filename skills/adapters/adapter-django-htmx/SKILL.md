@@ -39,3 +39,7 @@ Use this skill when developing user interfaces in a Python Django application.
 
 4. **Tailwind CSS:**
    - Apply design system archetype tokens into Tailwind utilities.
+
+5. **Django Management Commands First:**
+   - ALWAYS execute `python manage.py startapp <name>` when adding modular application boundaries to ensure `apps.py` and `models.py` follow Django conventions.
+   - Run `python manage.py check` or `ruff check` to autonomously verify syntax and framework configuration before declaring completion.

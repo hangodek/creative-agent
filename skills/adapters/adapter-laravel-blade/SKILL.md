@@ -28,3 +28,8 @@ Use this skill when developing user interfaces in a Laravel PHP codebase.
 
 4. **Tailwind CSS Integration:**
    - Apply design archetype tokens (Spotify, Linear, Stripe, Notion) into standard Tailwind classes.
+
+5. **Artisan CLI Generators First:**
+   - ALWAYS execute `php artisan make:component <name>` to scaffold Blade components into the proper directory structure.
+   - ALWAYS execute `php artisan make:livewire <name>` for reactive Livewire components to generate the paired PHP class and Blade view.
+   - Run `php artisan test` or `composer validate` to self-verify changes.

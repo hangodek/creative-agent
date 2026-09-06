@@ -25,6 +25,7 @@
 * **🌐 134+ Production-Grade Skills:** Combines Matt Pocock's complete engineering and productivity suite (TDD, Code Review, Architecture Deepening, Grilling), OpenDesign workflows, and 74 measured real-world brand design systems.
 * **🛡️ Hardened Against Edge Cases:** Built-in resilience for Monorepos (`apps/*`), Hybrid stacks (Rails+React, Django+Vue, Go+Svelte), Non-UI backends/CLI tools, Svelte 5 non-void tags, and proprietary font fallbacks.
 * **🚀 Organic User Flexibility:** Solves the AI passive-inertia problem. Banned AI-invented speculative bloat, but unconstrained velocity for user-directed expansions without brittle binary view traps (`#landing`, `#app`, `#studio`).
+* **⚙️ Ecosystem Idiom & Built-in Generators First:** Banned manual boilerplate reinventing. Mandates running official framework CLI generators (`bin/rails generate stimulus`, `php artisan make:component`, `python manage.py startapp`, `npx shadcn@latest add`, `templ generate`) rather than handcrafting error-prone files.
 
 ---
 

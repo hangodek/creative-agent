@@ -33,3 +33,7 @@ Use this skill when developing user interfaces in a Go web application.
 
 4. **Tailwind CSS & Styling:**
    - Incorporate design system archetype tokens into Tailwind utility classes.
+
+5. **Built-in Tooling & Compilation Loop:**
+   - ALWAYS execute `templ generate` after adding or editing `.templ` component files before compiling.
+   - Run `go vet ./...` or `go test ./...` to autonomously verify compilation before completion.

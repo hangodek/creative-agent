@@ -6,7 +6,7 @@ These standing invariants apply across every programming language, framework, an
 
 ## 1. The Dual Invariant Contract (`AGENTS.md` and `design-system/MASTER.md` are MANDATORY)
 - **EVERY project MUST have `AGENTS.md` at its root.** This guarantees the project is 100% self-contained across any developer, machine, or agentic session.
-- **Canonical Copy Rule:** When writing `AGENTS.md` to a project root, ALWAYS copy the FULL canonical document (all 10 sections). NEVER write a truncated or partial 5-line summary.
+- **Canonical Copy Rule:** When writing `AGENTS.md` to a project root, ALWAYS copy the FULL canonical document (all 11 sections). NEVER write a truncated or partial 5-line summary.
 - **UI Projects Contract:** Every project with a user interface MUST have `design-system/MASTER.md`.
   - **Scenario A — Direct Build Requests** (e.g. *"make me a simple html js + css todolist app"*, *"build a dashboard"*):
     - Do NOT stall in repetitive generic approval loops.
@@ -64,7 +64,19 @@ These standing invariants apply across every programming language, framework, an
 
 ---
 
-## 6. Autonomous Self-Verification Loop
+## 6. Ecosystem Idiom & Built-in Generators First
+- **Never manually reinvent framework primitives.** When an established ecosystem provides official CLI generators, scaffolding tools, or code compilers, ALWAYS prioritize executing them via `bash` before handcrafting raw boilerplate:
+  - *Ruby on Rails:* Use `bin/rails generate stimulus <name>`, `bin/rails generate component <name>` (ViewComponent), or `bin/rails generate controller/migration`. Never manually create files that disrupt Zeitwerk autoloading conventions. Run `bin/rails zeitwerk:check`.
+  - *Laravel / PHP:* Use `php artisan make:component <name>`, `php artisan make:livewire <name>`, `php artisan make:controller`, or `php artisan make:model -m`.
+  - *Django / Python:* Use `python manage.py startapp <name>`, `python manage.py makemigrations`, and `python manage.py migrate`.
+  - *React / Next.js with shadcn/ui:* When a primitive (Dialog, Sheet, DropdownMenu, Tabs, Toast) is needed, ALWAYS check `@/components/ui/` first; if absent, execute `npx shadcn@latest add <component>` rather than copy-pasting an unvetted or inaccessible custom implementation.
+  - *Go with Templ:* Always execute `templ generate` after adding or editing `.templ` component files before compiling.
+  - *Flutter / Dart:* Use `dart run build_runner build` for code generators (Freezed, JSON serializable, Riverpod).
+- **Strict Convention over Configuration:** Adhere strictly to the framework's native casing, naming, and directory patterns (snake_case in Rails/Python, PascalCase in React/Vue/Svelte, kebab-case in Angular/Astro).
+
+---
+
+## 7. Autonomous Self-Verification Loop
 - **Verify before declaring completion.** Always execute the project's build, compile, or lint command autonomously:
   - *Node / TypeScript:* `npm run build` or `npx tsc --noEmit`.
   - *Ruby on Rails:* `bin/rails zeitwerk:check`.
@@ -77,7 +89,7 @@ These standing invariants apply across every programming language, framework, an
 
 ---
 
-## 7. Proactive Refactoring Directive (Existing Codebases)
+## 8. Proactive Refactoring Directive (Existing Codebases)
 - When asked to "polish", "clean up", "tidy up", or "improve architecture" on an existing codebase:
   - Proactively scan for code smells (duplicated styling maps, components >250 lines).
   - Automatically extract duplicate styling maps to `src/constants/theme.ts`.
@@ -86,7 +98,7 @@ These standing invariants apply across every programming language, framework, an
 
 ---
 
-## 8. The 5 Production States of UI
+## 9. The 5 Production States of UI
 Whenever building data-driven interfaces (tables, lists, cards, feeds), implement all 5 states:
 1. **Empty State:** Distinctive, helpful visual state with context copy and clear primary CTA when 0 items exist.
 2. **Loading / Skeleton State:** Geometry-matched animated shimmer (not generic circular spinners).
@@ -96,13 +108,13 @@ Whenever building data-driven interfaces (tables, lists, cards, feeds), implemen
 
 ---
 
-## 9. Industry-Accurate Domain Mock Data
+## 10. Industry-Accurate Domain Mock Data
 - **Ban generic placeholder text.** Never use "Lorem ipsum", "John Doe", "Task 1", or "Item A".
 - Generate domain-rich, industry-accurate mock data (real SKUs, genuine fabric/hardware materials, realistic timestamps, ISO formatted currencies, authentic business categories).
 
 ---
 
-## 10. Universal Accessibility & Craft Floor
+## 11. Universal Accessibility & Craft Floor
 - **Icon Primitives:** Use SVG icon primitives (Lucide / Heroicons / Phosphor). Never use Unicode emojis as UI control icons.
 - **Interactive Affordance:** Add `cursor-pointer` to all clickable buttons, cards, tabs, and toggles.
 - **Contrast Ratios:** Maintain WCAG 2.2 AA (≥4.5:1) text contrast in both light and dark modes.
