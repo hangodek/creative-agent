@@ -8,13 +8,17 @@ These standing invariants apply across every programming language, framework, an
 - **EVERY project MUST have `AGENTS.md` at its root.** This guarantees the project is 100% self-contained across any developer, machine, or agentic session.
 - **Canonical Copy Rule:** When writing `AGENTS.md` to a project root, ALWAYS copy the FULL canonical document (all 11 sections). NEVER write a truncated or partial 5-line summary.
 - **UI Projects Contract:** Every project with a user interface MUST have `design-system/MASTER.md`.
-  - **The True Canonical `MASTER.md` Standard (Single Source of Truth):**
-    - **Zero Fragmentation:** NEVER split design specifications across competing files (e.g. `DESIGN.md` vs `MASTER.md` vs `GUIDELINES.md`). Doing so creates dual-source ambiguity and causes the AI to guess typography and padding.
-    - **The 4 Required Pillars of `MASTER.md`:** `design-system/MASTER.md` must be written as a comprehensive, self-contained specification covering:
-      1. *Palette Roles:* Exact hex codes for canvas floor, surface 1–4 ladder, hairlines, text hierarchy (primary/muted/subtle), and accent CTA.
-      2. *Mathematical Typography Scale:* Explicit matrix of Role, Font Family, Size, Weight, Line Height, and Letter Spacing (negative tracking).
-      3. *Geometry & Spacing Grammar:* Exact dimensions for buttons (height, padding, radius), cards (padding, radius, border), inputs, and focus rings.
-      4. *Interaction States:* Hover lift hexes, active scale transforms (`active:scale-[0.98]`), and smooth transitions (`duration-150`).
+  - **The Canonical Embed Standard (The Complete Specification Rule):**
+    - **No Truncated Summaries:** NEVER generate an ad-hoc 30-to-50-line skeleton that drops typography tracking, spacing tokens, or component grammar. Doing so forces future turns to guess and hallucinate styling.
+    - **Zero Fragmentation:** NEVER split design specifications across competing files (e.g. `DESIGN.md` vs `MASTER.md` vs `GUIDELINES.md`). Doing so creates dual-source ambiguity and context drift.
+    - **Direct Canonical Embed from Catalog:** When establishing `design-system/MASTER.md` from the 74-brand catalog, copy or embed the **complete specification body of `skills/design-systems/design-<brand>/SKILL.md` directly into `design-system/MASTER.md`**, ensuring it preserves the full ~250–350 line manual covering:
+      1. *Visual Theme & Atmosphere:* Full philosophy, whitespace rules, and brand essence.
+      2. *Complete Palette Roles:* Exact hexes for canvas floor, surface 1–4 ladder, hairlines, text hierarchy (primary/muted/subtle), and accent CTAs (active/hover/focus).
+      3. *Mathematical Typography Scale Table:* The full matrix of Token, Size, Weight, Line Height, and exact Letter Spacing tracking (e.g. `-3.0px` at 80px).
+      4. *Spacing Scale & Layout Grid:* Explicit 4px base units from `{spacing.xxs}` up to `{spacing.section}` 96px, and container max-widths.
+      5. *Geometry & Border Radius Scale:* Explicit scale from 4px up to 9999px pill, with exact button and input dimensions.
+      6. *Elevation Ladder:* Levels 0 through 4 with hairline treatments and focus outlines.
+      7. *Brand Anti-Patterns:* The mandatory "What NEVER to do" negative constraints.
   - **Scenario A — Direct Build Requests** (e.g. *"make me a simple html js + css todolist app"*, *"build a dashboard"*):
     - Do NOT stall in repetitive generic approval loops.
     - Automatically pick the best matching design archetype from the 74-brand catalog (e.g. *Spotify* for dark media, *Linear* for precision dark, *Wired/Substack* for editorial, *Stripe* for clean light).

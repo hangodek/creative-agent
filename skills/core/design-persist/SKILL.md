@@ -27,41 +27,19 @@ your-project/
 
 ---
 
-## 2. On First UI Generation (Write True Canonical Master)
+## 2. On First UI Generation (The Canonical Embed Standard)
 
-NEVER split design specifications across competing files (e.g. `DESIGN.md` vs `MASTER.md` vs `GUIDELINES.md`). Doing so creates dual-source ambiguity and causes the AI to guess typography and padding.
+NEVER split design specifications across competing files (e.g. `DESIGN.md` vs `MASTER.md` vs `GUIDELINES.md`), and NEVER generate a truncated 30-line skeleton that drops typography tracking, spacing scales, or component grammar.
 
-`design-system/MASTER.md` must be written as a comprehensive, self-contained specification covering:
+When establishing `design-system/MASTER.md` from the 74-brand catalog, copy or embed the **complete specification body of `skills/design-systems/design-<brand>/SKILL.md` directly into `design-system/MASTER.md`**, ensuring it preserves the full ~250–350 line manual covering:
 
-```markdown
-# Project Design System Master: [Brand Archetype]
-
-## 1. Palette Roles (Exact Hexes & Semantics)
-- Canvas Floor: `#...`
-- Surface 1–4 Ladder: `#...`, `#...`, `#...`, `#...`
-- Hairlines: `#...` (1px structural dividers)
-- Ink Hierarchy: Primary `#...`, Muted `#...`, Subtle `#...`
-- Accent CTA: `#...` (Hover: `#...`, Active: `#...`)
-
-## 2. Mathematical Typography Scale (Zero Guesswork)
-| Role | Font Family | Size | Weight | Line Height | Letter Spacing |
-|---|---|---|---|---|---|
-| Display Hero | [Family] | 56px | 600 | 1.10 | -1.8px (-0.03em) |
-| Section Headline | [Family] | 28px | 600 | 1.20 | -0.6px (-0.02em) |
-| Card Title | [Family] | 18px | 500 | 1.30 | -0.2px (-0.01em) |
-| Body Text | [Family] | 14px | 400 | 1.50 | -0.05px |
-| Technical Code | [Family Mono] | 12px | 400 | 1.40 | tabular-nums |
-
-## 3. Geometry & Padding Grammar (Exact Dimensions)
-- Primary CTA Button: `height: 36px`, `padding: 8px 16px`, `radius: 6px/full`, `cursor: pointer`
-- Standard Card: `padding: 20px / 24px`, `radius: 12px`, `border: 1px solid hairline`
-- Inputs: `height: 38px`, `padding: 8px 12px`, `radius: 6px`, `focus-ring: 2px solid accent`
-
-## 4. Interaction States
-- Hover Lift: Lift accent hex, smooth `duration-150`
-- Active Press: `active:scale-[0.98]`
-- Keyboard Focus: Explicit `focus-visible:ring-2`
-```
+1. **Visual Theme & Atmosphere:** Complete brand essence, whitespace rules, and philosophy.
+2. **Complete Palette Roles:** Exact hex codes for canvas floor, surface 1–4 ladder, hairlines, text hierarchy, active/hover/focus states.
+3. **Mathematical Typography Scale Table:** Complete matrix of Token, Size, Weight, Line Height, and exact Letter Spacing tracking (e.g. `-3.0px` at 80px).
+4. **Spacing Scale & Layout Grid:** Explicit 4px base units from `{spacing.xxs}` 4px up to `{spacing.section}` 96px, and container max-widths.
+5. **Geometry & Border Radius Scale:** Explicit scale from 4px up to 9999px pill, with exact button and input dimensions.
+6. **Elevation Ladder:** Levels 0 through 4 with hairline treatments and focus outlines.
+7. **Brand Anti-Patterns:** The mandatory "What NEVER to do" negative constraints.
 
 ---
 
