@@ -133,10 +133,17 @@ Whenever building data-driven interfaces (tables, lists, cards, feeds), implemen
 
 ---
 
-## 11. Universal Accessibility & Craft Floor
+## 11. Universal Accessibility, Craft Floor & Optical Fidelity
 - **Icon Primitives:** Use SVG icon primitives (Lucide / Heroicons / Phosphor). Never use Unicode emojis as UI control icons.
 - **Interactive Affordance:** Add `cursor-pointer` to all clickable buttons, cards, tabs, and toggles.
 - **Contrast Ratios:** Maintain WCAG 2.2 AA (≥4.5:1) text contrast in both light and dark modes.
 - **Keyboard Navigation:** Include `focus-visible:ring` on all interactive controls.
 - **Tabular Figures:** Apply `tabular-nums` (or `font-mono tabular-nums`) to all columns containing numbers, prices, or dates to eliminate horizontal layout jitter.
-- **Proprietary Font Fallbacks:** If a chosen brand uses proprietary typefaces (e.g. Spotify CircularSp, Apple SF Pro, Renault NouvelR), always pair with verified Google Fonts substitutes (Inter, Plus Jakarta Sans, Montserrat) so rendering never defaults to browser serif.
+- **Optical Tracking on Display:** Headings 28px+ must NEVER use loose `tracking-normal`. Apply proportional negative tracking (`tracking-[-0.02em]` at 28px, `tracking-[-0.035em]` at 44px, `tracking-[-0.045em]` at 64px+) to eliminate amateur typography gaps.
+- **Brand Weight Discipline:** Strictly obey the chosen archetype's weight signature. For Stripe, display headlines MUST render in `font-light` (weight 300); never default to `font-bold`. For Linear, render display in weight 600 with 1.10 line-height.
+- **OpenType Stylistic Sets & Curated Substitutes:**
+  - *Stripe / Fintech:* Pair `Inter` (weight 300) with `font-feature-settings: "ss01", "tnum"` globally to unlock geometric single-story glyphs and tabular alignment.
+  - *Spotify / Media:* Pair `Plus Jakarta Sans` with full-pill buttons (`rounded-full`) and uppercase button labels with positive tracking (`tracking-[1.4px]`).
+  - *The Verge / High-Voltage:* Pair `Anton` or `Cinzel` (with +0.15 line-height loosening) with mono-uppercase timestamps and hazard 1px borders.
+  - *WIRED / Broadsheet:* Pair `Newsreader` or `Playfair Display` with strictly square 0px corners (`rounded-none`).
+  - *Apple / Minimalist:* Pair `Inter` (weights 400–600) with generous full-viewport section breathing room and parchment tones.

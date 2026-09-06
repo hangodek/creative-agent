@@ -40,9 +40,32 @@ Micro/Overline: 10px – 11px (tracking: +0.06em, uppercase, font-semibold)
 
 ---
 
-## 3. Recommended Font Pairings
+## 3. Brand Optical Fidelity & Proprietary Substitutes
 
-* **Modern Precision (Linear/Vercel):** Geist Sans / Inter + Geist Mono.
-* **Warm SaaS (Stripe/Supabase):** Plus Jakarta Sans / General Sans + JetBrains Mono.
-* **Editorial / Content (Notion/Substack):** Newsreader / Merriweather + Inter.
-* **Terminal / Dev-First:** Fira Code / Berkeley Mono / JetBrains Mono.
+World-class brands (Stripe, Linear, Apple, The Verge, Spotify) license expensive proprietary typefaces. When building interfaces, NEVER let the browser fall back to generic uncalibrated fonts. Use these verified optical substitutes:
+
+| Brand Archetype | Proprietary Target | Open-Source Substitute | Optical Adjustments & CSS Flags |
+|---|---|---|---|
+| **Stripe / Fintech** | Söhne (Klim) | `Inter` (Google Fonts) | **Weight 300 only**, `font-feature-settings: "ss01", "tnum"`, `tracking-[-0.025em]`. Never default to bold. |
+| **Linear / Raycast** | Linear Display / SF Pro | `Inter` / `Geist Sans` | **Weight 600**, tight line-height `1.10`, negative tracking (`-1.8px` on 56px, `-0.6px` on 28px). |
+| **Spotify / Media** | CircularSp (Lineto) | `Plus Jakarta Sans` | Weight 700 headings, full-pill buttons (`rounded-full`), uppercase button labels with positive tracking (`tracking-[1.4px]`). |
+| **The Verge** | Manuka (Klim) | `Anton` / `Cinzel` | Heavy display stance, loosen line-height by **+0.15** to prevent glyph collision, pair with uppercase mono tags. |
+| **WIRED** | WiredDisplay (Condé Nast) | `Newsreader` / `Playfair Display` | High-contrast editorial serif, strictly square 0px corners (`rounded-none`), crisp 1px column rules. |
+| **Apple / Consumer** | SF Pro Display | `Inter` (Weights 400–600) | Whisper-soft contrast, generous edge-to-edge section breathing room, parchment tones (`#f5f5f7`). |
+
+---
+
+## 4. Mandatory Optical Tracking Matrix
+
+Never use `tracking-normal` on display headings 28px and above. Always apply proportional negative tracking:
+
+```css
+/* Tailwind Optical Tracking Matrix */
+.heading-sm { /* 20px - 24px */ @apply tracking-[-0.015em]; }
+.heading-md { /* 28px - 32px */ @apply tracking-[-0.025em]; }
+.heading-lg { /* 40px - 48px */ @apply tracking-[-0.035em]; }
+.heading-xl { /* 56px - 64px+ */ @apply tracking-[-0.045em]; }
+
+/* Eyebrows & Monospace Labels (Positive Tracking) */
+.label-eyebrow { @apply uppercase tracking-[0.06em] text-[11px] font-semibold; }
+```
