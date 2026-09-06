@@ -69,3 +69,17 @@ Never use `tracking-normal` on display headings 28px and above. Always apply pro
 /* Eyebrows & Monospace Labels (Positive Tracking) */
 .label-eyebrow { @apply uppercase tracking-[0.06em] text-[11px] font-semibold; }
 ```
+
+---
+
+## 5. Component Type Floor (The Anti-Ant-Text Mandate)
+
+AI coding agents habitually shrink everything into unreadable `text-xs` (12px), causing web applications to look tiny, weak, and amateurish unless zoomed to 110%. Enforce these strict physical component type floors:
+
+| UI Component Role | Minimum Type Size | Minimum Element Height / Padding | Rules & Anti-Patterns |
+|---|---|---|---|
+| **Primary Action Buttons** | **14px–16px** (`text-sm` or `text-base`) | `height: 38px–44px` (`px-5 py-2.5`) | **NEVER use `text-xs` on buttons.** Buttons must feel tactile and substantial. |
+| **Card & Panel Titles** | **18px–20px** (`text-lg` or `text-xl`) | `font-semibold` or `font-medium` | Card titles must clearly dominate body copy. |
+| **Main Body Paragraphs** | **16px–17px** (`text-base` or `text-[17px]`) | `leading-relaxed` (1.5–1.65) | Long-form reading pace, matching authentic Stripe and Apple cadence. |
+| **Form Inputs & Selects** | **14px** (`text-sm` / `0.875rem`) | `height: 38px–42px` (`px-3.5 py-2`) | Avoid iOS browser auto-zoom zoom-ins triggered by inputs < 16px. |
+| **`text-xs` (12px / 0.75rem)** | **Strictly Restricted** | Micro-elements only | **ONLY for:** Category eyebrows, timestamps, pill badges, and table column headers. |

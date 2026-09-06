@@ -140,6 +140,11 @@ Whenever building data-driven interfaces (tables, lists, cards, feeds), implemen
 - **Keyboard Navigation:** Include `focus-visible:ring` on all interactive controls.
 - **Tabular Figures:** Apply `tabular-nums` (or `font-mono tabular-nums`) to all columns containing numbers, prices, or dates to eliminate horizontal layout jitter.
 - **Optical Tracking on Display:** Headings 28px+ must NEVER use loose `tracking-normal`. Apply proportional negative tracking (`tracking-[-0.02em]` at 28px, `tracking-[-0.035em]` at 44px, `tracking-[-0.045em]` at 64px+) to eliminate amateur typography gaps.
+- **Component Type Floor (Anti-Ant-Text Rule):**
+  - **`text-xs` (12px) is strictly restricted:** It must NEVER be used for card titles, form inputs, primary/secondary action buttons, or primary body copy. It is reserved exclusively for micro-eyebrows, timestamps, pill badges, and table column headers.
+  - **Button Physical Presence:** Action buttons must have a height floor of 38px–44px (e.g. `px-5 py-2.5 text-sm` or `text-base` / 14px–16px), never cramped `py-1 text-xs`.
+  - **Body Text Floor:** Main descriptive paragraphs and card copy must sit at `text-base` (16px) or `text-[17px]` with `leading-relaxed` (1.5–1.65 line-height), matching authentic Stripe, Apple, and Linear editorial cadence.
+  - **Card Title Floor:** Card and panel titles must sit at `text-lg` (18px) to `text-xl` (20px) font-semibold/font-medium, maintaining clear optical hierarchy over body copy.
 - **Brand Weight Discipline:** Strictly obey the chosen archetype's weight signature. For Stripe, display headlines MUST render in `font-light` (weight 300); never default to `font-bold`. For Linear, render display in weight 600 with 1.10 line-height.
 - **OpenType Stylistic Sets & Curated Substitutes:**
   - *Stripe / Fintech:* Pair `Inter` (weight 300) with `font-feature-settings: "ss01", "tnum"` globally to unlock geometric single-story glyphs and tabular alignment.
