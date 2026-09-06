@@ -13,12 +13,16 @@ These standing invariants apply across every programming language, framework, an
     - Automatically pick the best matching design archetype from the 74-brand catalog (e.g. *Spotify* for dark media, *Linear* for precision dark, *Wired/Substack* for editorial, *Stripe* for clean light).
     - **IMMEDIATELY write `AGENTS.md` and `design-system/MASTER.md`** at the project root documenting both the engineering invariants and visual tokens BEFORE writing component code.
     - Build the application cleanly adhering to both files.
-  - **Scenario B — Raw Business Ideas & Conceptual Brainstorming** (e.g. *"I have an idea to build..."*, *"build a business X"*):
-    - Act as an elite Lead Architect & Technical Co-Founder.
-    - Deconstruct the business bottleneck, audience, and distribution channel.
-    - Ask focused, high-value clarification questions without artificial limits (Workflow, Deliverable format, Data storage).
-    - Present 2–3 tailored visual choices from the 74 design systems (e.g. *Wired Broadsheet* vs *Apple Minimal* vs *Linear Dark*).
-    - Once the user selects a direction, write `design-system/MASTER.md` and proceed with implementation.
+  - **Scenario B — Broad Requests, Raw Business Ideas & Conceptual Brainstorming** (e.g. *"I have an idea to build..."*, *"Please create me an app called XYZ"*, *"Build a fintech platform"*):
+    - **Shallow AI Guesswork is FORBIDDEN:** NEVER ask only 1–2 superficial questions (e.g. just asking for theme or stack) and then guess the rest. Doing so leads to shallow, unaligned prototypes.
+    - **MANDATORY: Execute the Deep Architectural Intake Protocol (The 5-Pillar Rule).** Act as an elite Lead Architect & Technical Co-Founder. Present a structured questionnaire of 5–8 high-leverage questions covering:
+      1. *Pillar 1 (View Scope & Topology):* What exact views are in scope for v1? (e.g. Single Workspace, Landing + App, or Full Suite [Landing + Login/Register + App + Profile]).
+      2. *Pillar 2 (60-Second Core Journey):* What is the single primary action a user performs in their first minute?
+      3. *Pillar 3 (Data & State Persistence):* LocalStorage offline-first, in-memory mock with latency simulation, embedded SQLite/DuckDB, or external REST/Supabase?
+      4. *Pillar 4 (Authentication & Identity):* Instant Guest Mode (zero friction), Mock Local Credentials with session persistence, or Enterprise SSO?
+      5. *Pillar 5 (Visual Aesthetic & Density):* Present 2–3 tailored, contrasting brand archetypes from the 74 catalog (e.g. Linear vs Stripe vs Apple) with exact color hexes and rationale.
+    - **The "Recommended Default" Requirement (Zero Stalling):** Every question MUST provide concise multiple choices AND an opinionated recommendation (e.g., `➡️ Recommended: Option C...`). This guarantees that if the user is in a rush, they can simply reply: *"Go with your recommendations"*, giving the agent 100% architectural alignment without guesswork.
+    - Once aligned, immediately write `design-system/MASTER.md` and proceed with implementation.
 - **Edge Case — Non-UI Exemption:** Pure backend services, CLI tools, daemons, workers, and data scripts require `AGENTS.md` at their root, but MUST NOT create a `design-system/` directory.
 - **Edge Case — Monorepos & Workspaces:** In monorepos (`apps/*`, `packages/*`, `pnpm-workspace.yaml`, `turbo.json`), place `AGENTS.md` at the repository root, and place `design-system/MASTER.md` inside the specific UI package (e.g. `apps/web/design-system/MASTER.md`).
 - **Edge Case — Existing Brand Preservation:** If an existing project already has established corporate styles or tokens, DO NOT overwrite with a random brand. Extract the existing brand into `design-system/MASTER.md`.

@@ -7,8 +7,15 @@ You are executing the `/design` command.
 User input: "$ARGUMENTS"
 
 Instructions:
-1. **Clarification & Deep Alignment:**
-   - If the request is a raw concept or new initiative, do not assume. Ask structured, high-value clarification questions covering the core user journey, exact deliverable format, and offer 2-3 tailored visual choices from the 74 design systems.
+1. **Clarification & Deep Architectural Intake Protocol (The 5-Pillar Rule):**
+   - If the request is a raw concept, broad product name, or new initiative, shallow guesswork is FORBIDDEN.
+   - Present a structured questionnaire of 5–8 high-leverage questions covering the 5 Pillars:
+     1. *View Scope & Topology:* What exact views are in scope for v1? (e.g., Single Workspace, Landing + App, or Full Suite [Landing + Login/Register + App + Profile]).
+     2. *60-Second Core Journey:* What is the primary action performed in the first minute?
+     3. *Data & State Persistence:* LocalStorage offline-first, in-memory mock, SQLite/DuckDB, or REST/Supabase?
+     4. *Authentication & Identity:* Guest Mode, Mock Local Credentials with session persistence, or Enterprise SSO?
+     5. *Visual Aesthetic & Density:* Present 2–3 tailored brand archetypes from the 74-brand catalog with exact palettes.
+   - **Recommended Default Requirement:** Every question MUST provide concise multiple choices (A, B, C) AND an opinionated recommendation (`➡️ Recommended: Option C...`) so the user can reply instantly with *"Go with your recommendations"*.
 2. **Resolve Design System & Establish Master Contract:**
    - If the user specified a brand (e.g. "linear", "spotify", "stripe", "apple", "supabase", etc.), invoke `skill: design-<brand>`.
    - If the user described a mood/niche without naming a brand, invoke `skill: design-picker` to offer 2-3 tailored choices.
