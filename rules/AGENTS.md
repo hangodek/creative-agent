@@ -6,19 +6,23 @@ These standing invariants apply across every programming language, framework, an
 
 ## 1. The Dual Invariant Contract (`AGENTS.md` and `design-system/MASTER.md` are MANDATORY)
 - **EVERY project MUST have `AGENTS.md` at its root.** This guarantees the project is 100% self-contained across any developer, machine, or agentic session.
-- **Canonical Copy Rule:** When writing `AGENTS.md` to a project root, ALWAYS copy the FULL canonical document (all 9 sections). NEVER write a truncated or partial 5-line summary.
-- **EVERY project with a user interface MUST have `design-system/MASTER.md` at its root. No exceptions.**
-- **Scenario A — Direct Build Requests** (e.g. *"make me a simple html js + css todolist app"*, *"build a dashboard"*):
-  - Do NOT stall in repetitive generic approval loops.
-  - Automatically pick the best matching design archetype from the 74-brand catalog (e.g. *Spotify* for dark media, *Linear* for precision dark, *Wired/Substack* for editorial, *Stripe* for clean light).
-  - **IMMEDIATELY write `AGENTS.md` and `design-system/MASTER.md`** at the project root documenting both the engineering invariants and visual tokens BEFORE writing component code.
-  - Build the application cleanly adhering to both files.
-- **Scenario B — Raw Business Ideas & Conceptual Brainstorming** (e.g. *"aku ada ide mau buat..."*, *"bikin bisnis X"*):
-  - Act as an elite Lead Architect & Technical Co-Founder.
-  - Deconstruct the business bottleneck, audience, and distribution channel.
-  - Ask focused, high-value clarification questions without artificial limits (Workflow, Deliverable format, Data storage).
-  - Present 2–3 tailored visual choices from the 74 design systems (e.g. *Wired Broadsheet* vs *Apple Minimal* vs *Linear Dark*).
-  - Once the user selects a direction, write `design-system/MASTER.md` and proceed with implementation.
+- **Canonical Copy Rule:** When writing `AGENTS.md` to a project root, ALWAYS copy the FULL canonical document (all 10 sections). NEVER write a truncated or partial 5-line summary.
+- **UI Projects Contract:** Every project with a user interface MUST have `design-system/MASTER.md`.
+  - **Scenario A — Direct Build Requests** (e.g. *"make me a simple html js + css todolist app"*, *"build a dashboard"*):
+    - Do NOT stall in repetitive generic approval loops.
+    - Automatically pick the best matching design archetype from the 74-brand catalog (e.g. *Spotify* for dark media, *Linear* for precision dark, *Wired/Substack* for editorial, *Stripe* for clean light).
+    - **IMMEDIATELY write `AGENTS.md` and `design-system/MASTER.md`** at the project root documenting both the engineering invariants and visual tokens BEFORE writing component code.
+    - Build the application cleanly adhering to both files.
+  - **Scenario B — Raw Business Ideas & Conceptual Brainstorming** (e.g. *"aku ada ide mau buat..."*, *"bikin bisnis X"*):
+    - Act as an elite Lead Architect & Technical Co-Founder.
+    - Deconstruct the business bottleneck, audience, and distribution channel.
+    - Ask focused, high-value clarification questions without artificial limits (Workflow, Deliverable format, Data storage).
+    - Present 2–3 tailored visual choices from the 74 design systems (e.g. *Wired Broadsheet* vs *Apple Minimal* vs *Linear Dark*).
+    - Once the user selects a direction, write `design-system/MASTER.md` and proceed with implementation.
+- **Edge Case — Non-UI Exemption:** Pure backend services, CLI tools, daemons, workers, and data scripts require `AGENTS.md` at their root, but MUST NOT create a `design-system/` directory.
+- **Edge Case — Monorepos & Workspaces:** In monorepos (`apps/*`, `packages/*`, `pnpm-workspace.yaml`, `turbo.json`), place `AGENTS.md` at the repository root, and place `design-system/MASTER.md` inside the specific UI package (e.g. `apps/web/design-system/MASTER.md`).
+- **Edge Case — Existing Brand Preservation:** If an existing project already has established corporate styles or tokens, DO NOT overwrite with a random brand. Extract the existing brand into `design-system/MASTER.md`.
+- **Edge Case — Explicit Re-Theming:** If the user requests changing the visual theme, update `design-system/MASTER.md` first, then cascade token updates into the centralized constants file.
 
 ---
 
@@ -49,10 +53,17 @@ These standing invariants apply across every programming language, framework, an
   - *Svelte 5:* Runes Modules (`tasks.svelte.ts`).
   - *Rails:* Stimulus controllers for micro-interactions & ViewComponents for isolated UI pieces.
   - *Laravel:* Livewire components & Action classes.
+- **Scope Clarification:** The 250-line budget applies to presentation view code. Complex table schemas, column declarations (`columns.tsx`), and data interfaces should be placed in dedicated `columns.tsx` or `schema.ts` files without arbitrary line-butchering.
 
 ---
 
-## 5. Autonomous Self-Verification Loop
+## 5. Hybrid & Polyglot Priority (UI Layer Wins)
+- In hybrid codebases containing both a backend framework and a modern frontend (e.g. Rails with Inertia/React, Django with Vue, Go with Svelte, Laravel with Livewire/React):
+  - **The Frontend UI Layer takes precedence for view generation.** Write native frontend components (`.tsx`, `.vue`, `.svelte`) rather than falling back to raw backend template files.
+
+---
+
+## 6. Autonomous Self-Verification Loop
 - **Verify before declaring completion.** Always execute the project's build, compile, or lint command autonomously:
   - *Node / TypeScript:* `npm run build` or `npx tsc --noEmit`.
   - *Ruby on Rails:* `bin/rails zeitwerk:check`.
@@ -65,7 +76,7 @@ These standing invariants apply across every programming language, framework, an
 
 ---
 
-## 6. Proactive Refactoring Directive (Existing Codebases)
+## 7. Proactive Refactoring Directive (Existing Codebases)
 - When asked to "polish", "clean up", "rapikan", or "benerin arsitekturnya" on an existing codebase:
   - Proactively scan for code smells (duplicated styling maps, components >250 lines).
   - Automatically extract duplicate styling maps to `src/constants/theme.ts`.
@@ -74,7 +85,7 @@ These standing invariants apply across every programming language, framework, an
 
 ---
 
-## 7. The 5 Production States of UI
+## 8. The 5 Production States of UI
 Whenever building data-driven interfaces (tables, lists, cards, feeds), implement all 5 states:
 1. **Empty State:** Distinctive, helpful visual state with context copy and clear primary CTA when 0 items exist.
 2. **Loading / Skeleton State:** Geometry-matched animated shimmer (not generic circular spinners).
@@ -84,15 +95,16 @@ Whenever building data-driven interfaces (tables, lists, cards, feeds), implemen
 
 ---
 
-## 8. Industry-Accurate Domain Mock Data
+## 9. Industry-Accurate Domain Mock Data
 - **Ban generic placeholder text.** Never use "Lorem ipsum", "John Doe", "Task 1", or "Item A".
 - Generate domain-rich, industry-accurate mock data (real SKUs, genuine fabric/hardware materials, realistic timestamps, ISO formatted currencies, authentic business categories).
 
 ---
 
-## 9. Universal Accessibility & Craft Floor
+## 10. Universal Accessibility & Craft Floor
 - **Icon Primitives:** Use SVG icon primitives (Lucide / Heroicons / Phosphor). Never use Unicode emojis as UI control icons.
 - **Interactive Affordance:** Add `cursor-pointer` to all clickable buttons, cards, tabs, and toggles.
 - **Contrast Ratios:** Maintain WCAG 2.2 AA (≥4.5:1) text contrast in both light and dark modes.
 - **Keyboard Navigation:** Include `focus-visible:ring` on all interactive controls.
 - **Tabular Figures:** Apply `tabular-nums` (or `font-mono tabular-nums`) to all columns containing numbers, prices, or dates to eliminate horizontal layout jitter.
+- **Proprietary Font Fallbacks:** If a chosen brand uses proprietary typefaces (e.g. Spotify CircularSp, Apple SF Pro, Renault NouvelR), always pair with verified Google Fonts substitutes (Inter, Plus Jakarta Sans, Montserrat) so rendering never defaults to browser serif.
