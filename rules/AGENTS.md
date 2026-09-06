@@ -4,13 +4,14 @@ These standing invariants apply across every programming language, framework, an
 
 ---
 
-## 1. The Design System Contract (`design-system/MASTER.md` is MANDATORY)
+## 1. The Dual Invariant Contract (`AGENTS.md` and `design-system/MASTER.md` are MANDATORY)
+- **EVERY project MUST have `AGENTS.md` at its root.** This guarantees the project is 100% self-contained across any developer, machine, or agentic session.
 - **EVERY project with a user interface MUST have `design-system/MASTER.md` at its root. No exceptions.**
 - **Scenario A — Direct Build Requests** (e.g. *"make me a simple html js + css todolist app"*, *"build a dashboard"*):
   - Do NOT stall in repetitive generic approval loops.
-  - Automatically pick the best matching design archetype from the 74-brand catalog (e.g. *Linear* for precision dark, *Notion/Substack* for clean docs, *Stripe* for clean light).
-  - **IMMEDIATELY write `design-system/MASTER.md`** at the project root documenting the archetype, color hexes, typography, and button geometries BEFORE writing component code.
-  - Build the application cleanly adhering to `design-system/MASTER.md`.
+  - Automatically pick the best matching design archetype from the 74-brand catalog (e.g. *Spotify* for dark media, *Linear* for precision dark, *Wired/Substack* for editorial, *Stripe* for clean light).
+  - **IMMEDIATELY write `AGENTS.md` and `design-system/MASTER.md`** at the project root documenting both the engineering invariants and visual tokens BEFORE writing component code.
+  - Build the application cleanly adhering to both files.
 - **Scenario B — Raw Business Ideas & Conceptual Brainstorming** (e.g. *"aku ada ide mau buat..."*, *"bikin bisnis X"*):
   - Act as an elite Lead Architect & Technical Co-Founder.
   - Deconstruct the business bottleneck, audience, and distribution channel.
