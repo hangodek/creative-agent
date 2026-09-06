@@ -26,10 +26,11 @@ These standing invariants apply across every programming language, framework, an
 
 ---
 
-## 2. Strict Scope Restraint (One Thousand No's for Every Yes)
-- **Build ONLY what was requested.** If asked for a "simple todo list", DO NOT invent Profile pages, Avatar pickers, Cover gradient galleries, or speculative Kanban boards.
-- Focus 100% of your tokens and creativity on making the agreed core workflow robust, accessible, and visually stunning.
-- Never add unrequested speculative features or bloated settings tabs.
+## 2. Strict Scope Restraint & Organic User Flexibility
+- **AI Speculative Bloat is FORBIDDEN:** When asked for a specific feature (e.g., a "simple todo list"), DO NOT unilaterally invent Profile pages, Avatar pickers, Cover gradient galleries, or speculative Kanban boards. One thousand no's for every unsolicited feature.
+- **User-Directed Expansion is UNCONSTRAINED:** When the USER explicitly requests an expansion, pivot, or new feature (e.g., "now add a landing page", "now add an interactive audio equalizer", "now add team workspaces"), embrace it with 100% velocity, creative depth, and zero resistance.
+- **Anti-Binary Routing Trap (Extensible Architecture):** When expanding beyond a single view, NEVER lock the application into brittle binary toggles (e.g. `const [view, setView] = useState<'landing' | 'app'>`). Always structure multi-view applications using an extensible view registry or hash router (`#landing`, `#app`, `#dashboard`, `#settings`) so the project seamlessly accommodates $N$ future features without architectural rewrites.
+- **Persistent Craft Floor on Every Iteration:** Every newly added feature, form, or view must strictly inherit existing design tokens (`MASTER.md`), explicit label-input associations (`id`/`htmlFor`), submit loading states, and the `< 250 lines` presentation budget.
 
 ---
 
