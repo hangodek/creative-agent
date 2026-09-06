@@ -22,7 +22,8 @@
 * **⚡ Just-in-Time (JIT) Modular Loading:** Each skill and design system is an isolated `SKILL.md`. When you ask for a Spotify-style dashboard in Rails, only ~1,200 tokens of relevant tokens and adapter rules are loaded. Instant TTFT, ultra-lightweight, zero lag.
 * **🛠 12 Polyglot Framework Adapters:** Automatically introspects your workspace (`package.json`, `Gemfile`, `composer.json`, `pyproject.toml`, `go.mod`, `pubspec.yaml`, Tailwind v3/v4 setup) and outputs idiomatic, production-ready code directly into your project files.
 * **🛡 Universal Polyglot Guardian (`rules/AGENTS.md`):** High-level architectural invariants (Strict Scope Restraint, Single Source of Truth / DRY constants, Component Line Budget < 250 lines, Autonomous Self-Verification Loop, 5 States of UI).
-* **🌐 133+ Production-Grade Skills:** Combines Matt Pocock's complete engineering and productivity suite (TDD, Code Review, Architecture Deepening, Grilling), OpenDesign workflows, and 74 measured real-world brand design systems.
+* **🌐 134+ Production-Grade Skills:** Combines Matt Pocock's complete engineering and productivity suite (TDD, Code Review, Architecture Deepening, Grilling), OpenDesign workflows, and 74 measured real-world brand design systems.
+* **🛡️ Hardened Against Edge Cases:** Built-in resilience for Monorepos (`apps/*`), Hybrid stacks (Rails+React, Django+Vue, Go+Svelte), Non-UI backends/CLI tools, and proprietary font fallbacks.
 
 ---
 
