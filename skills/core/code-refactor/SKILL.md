@@ -4,13 +4,13 @@ description: >
   Proactive, behavior-preserving code refactoring and architecture cleanup for existing codebases.
   Decomposes monolithic components (>250 lines) into modular Custom Hooks or abstraction layers,
   consolidates duplicated styling maps/dictionaries into a single source of truth, and eliminates dead code
-  without breaking existing user functionality. Trigger on "refactor", "polish", "clean up", "rapikan",
-  "benerin arsitekturnya", or requests to simplify and improve code health.
+  without breaking existing user functionality. Trigger on "refactor", "polish", "clean up", "tidy up",
+  "improve architecture", or requests to simplify and improve code health.
 ---
 
 # Code Refactoring & Architectural Cleanup
 
-Use this skill whenever asked to **"refactor"**, **"polish"**, **"clean up"**, **"rapikan"**, or **"simplify"** an existing codebase.
+Use this skill whenever asked to **"refactor"**, **"polish"**, **"clean up"**, **"tidy up"**, or **"simplify"** an existing codebase.
 
 AI coding agents often hesitate to touch existing code due to passive inertia, leaving bloated files and duplicated dictionaries untouched. This skill gives you explicit permission and strict discipline to proactively clean architectural debt while preserving 100% of working behavior.
 

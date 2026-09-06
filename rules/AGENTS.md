@@ -13,7 +13,7 @@ These standing invariants apply across every programming language, framework, an
     - Automatically pick the best matching design archetype from the 74-brand catalog (e.g. *Spotify* for dark media, *Linear* for precision dark, *Wired/Substack* for editorial, *Stripe* for clean light).
     - **IMMEDIATELY write `AGENTS.md` and `design-system/MASTER.md`** at the project root documenting both the engineering invariants and visual tokens BEFORE writing component code.
     - Build the application cleanly adhering to both files.
-  - **Scenario B — Raw Business Ideas & Conceptual Brainstorming** (e.g. *"aku ada ide mau buat..."*, *"bikin bisnis X"*):
+  - **Scenario B — Raw Business Ideas & Conceptual Brainstorming** (e.g. *"I have an idea to build..."*, *"build a business X"*):
     - Act as an elite Lead Architect & Technical Co-Founder.
     - Deconstruct the business bottleneck, audience, and distribution channel.
     - Ask focused, high-value clarification questions without artificial limits (Workflow, Deliverable format, Data storage).
@@ -77,7 +77,7 @@ These standing invariants apply across every programming language, framework, an
 ---
 
 ## 7. Proactive Refactoring Directive (Existing Codebases)
-- When asked to "polish", "clean up", "rapikan", or "benerin arsitekturnya" on an existing codebase:
+- When asked to "polish", "clean up", "tidy up", or "improve architecture" on an existing codebase:
   - Proactively scan for code smells (duplicated styling maps, components >250 lines).
   - Automatically extract duplicate styling maps to `src/constants/theme.ts`.
   - Automatically decompose monolithic components (>250 lines) into dedicated Custom Hooks.
